@@ -93,14 +93,14 @@ flowchart TD
 ### Stage 4 — Whole-Volume 3D MRI Ablation ($N=622$)
 - **Source Files:** `results/02_whole_volume_3d_mri/metrics.csv`, `results/02_whole_volume_3d_mri/paired_bootstrap_deltas.csv`
 - **Objective:** Evaluate whether adding a 3D CNN branch processing raw 3D T1 MRI provides statistically significant incremental predictive value over Clinical + FS29.
-- **Architecture:** Compact cross-modal attention network.
+- **Architecture:** Compact multimodal inter-modality self-attention network.
   - Tabular encoders for Clinical (10) and FreeSurfer (29).
   - 4-layer 3D ConvNet for whole-volume MRI.
-  - Multi-head cross-attention ($h=2, d=32$) with attention dropout ($p=0.3$).
+  - Inter-modality multi-head self-attention ($h=2, d=32$) operating on modality-token sequences `[ec, ef, em]` with attention dropout ($p=0.3$).
 - **Experimental Models:**
   - **Model A (Control):** Clinical + FS29, MRI branch disabled/zero-masked (106,753 parameters).
   - **Model B (Experimental):** Clinical + FS29 + Whole-Volume 3D MRI (743,665 parameters).
-- **Protocol:** 3-repeat 5-fold cross-validation (30 model runs across seeds 0, 1, 2).
+- **Protocol:** 3-repeat 5-fold cross-validation (30 model runs across seeds 0, 1, 2 on CPU).
 - **Empirical Results:**
   - Model A Pooled AUROC: **$0.8517$** (95% CI: $[0.8142, 0.8872]$), PR-AUC: 0.6640, Brier: 0.1392
   - Model B Pooled AUROC: **$0.8587$** (95% CI: $[0.8219, 0.8936]$), PR-AUC: 0.6712, Brier: 0.1354
@@ -125,7 +125,7 @@ flowchart TD
 
 ### Stage 6 — Anatomical Subcortical MRI ROI Incremental Experiment ($N=564$)
 - **Source Files:** `results/03_subcortical_mri_roi/metrics.csv`, `results/03_subcortical_mri_roi/paired_bootstrap_deltas.csv`
-- **Objective:** Address potential CNN overfitting by evaluating targeted, anatomically informed intensity features from 16 Harvard-Oxford subcortical structures on a complete-case matched cohort ($N=564$).
+- **Objective:** Address potential CNN overfitting by evaluating targeted, anatomically informed intensity features from 16 Harvard-Oxford subcortical structures on a complete-case matched cohort ($N=564$, 123 converters, 441 non-converters).
 - **Features Extracted:** 6 robust intensity statistics (mean, SD, 5th percentile, 95th percentile, median, IQR) per subcortical structure.
 - **Redundancy Analysis:** Modest Pearson correlation ($r \approx 0.30 - 0.36$) between ROI intensities and FreeSurfer volumes confirmed intensity features capture biologically distinct tissue contrast.
 - **Empirical Results (3-Repeat 5-Fold CV Ensemble):**

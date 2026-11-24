@@ -11,8 +11,8 @@ This directory synthesizes all empirical evidence generated across the project t
 | **Baseline: FreeSurfer Increment** | Full Dev ($N=622$) | 144 / 622 | 0.8440 (Clin) | 0.8787 (Clin+FS) | **+0.0391** | $[+0.0154, +0.0638]$ | $0.0010$ | **Statistically Significant** |
 | **Strict Follow-up ($\ge 730$d)** | Strict Dev ($N=583$) | 144 / 583 | 0.8525 (Clin) | 0.8860 (Clin+FS) | **+0.0335** | $[+0.0070, +0.0595]$ | $0.0020$ | **Statistically Significant** |
 | **Whole-Volume 3D MRI Ablation** | Full Dev ($N=622$) | 144 / 622 | 0.8517 (Model A) | 0.8587 (Model B) | **+0.0070** | $[-0.0057, +0.0197]$ | $0.2860$ | **Not Significant** |
-| **Subcortical MRI ROI Contrast** | Matched Dev ($N=564$) | 124 / 564 | 0.8643 (Model A) | 0.8688 (Model B) | **+0.0044** | $[-0.0029, +0.0122]$ | $0.2440$ | **Not Significant** |
-| **Subcortical FS Validation** | Matched Dev ($N=564$) | 124 / 564 | 0.8210 (Clin) | 0.8643 (Clin+FS) | **+0.0433** | $[+0.0135, +0.0747]$ | $0.0020$ | **Statistically Significant** |
+| **Subcortical MRI ROI Contrast** | Matched Dev ($N=564$) | 123 / 564 | 0.8643 (Model A) | 0.8688 (Model B) | **+0.0044** | $[-0.0029, +0.0122]$ | $0.2440$ | **Not Significant** |
+| **Subcortical FS Validation** | Matched Dev ($N=564$) | 123 / 564 | 0.8210 (Clin) | 0.8643 (Clin+FS) | **+0.0433** | $[+0.0135, +0.0747]$ | $0.0020$ | **Statistically Significant** |
 
 ---
 

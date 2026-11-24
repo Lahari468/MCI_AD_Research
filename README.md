@@ -13,7 +13,7 @@
 Predicting short-term progression from Mild Cognitive Impairment (MCI) to Alzheimer's Disease (AD) dementia is critical for clinical trial enrichment and early therapeutic intervention. While multimodal deep learning frameworks frequently incorporate raw 3D T1-weighted structural Magnetic Resonance Imaging (MRI), the true incremental prognostic value of voxel-level representations over standardized clinical testing and regional morphometry remains contentious. 
 
 In this investigation, we conduct a rigorous, leak-free empirical evaluation using participants from the Alzheimer's Disease Neuroimaging Initiative (ADNI). Starting from 1,199 screened participants, we establish a verified eligible cohort of 778 individuals partitioned into a primary development cohort ($N=622$) and a frozen internal holdout ($N=156$). We compare two distinct computer vision paradigms against robust tabular baselines:
-1. **Whole-Volume 3D MRI Ablation:** A 4-stage 3D Convolutional Neural Network (CNN) integrated with clinical and FreeSurfer tabular features via multi-head cross-modal attention.
+1. **Whole-Volume 3D MRI Ablation:** A 4-stage 3D Convolutional Neural Network (CNN) integrated with clinical and FreeSurfer tabular features via inter-modality multi-head self-attention.
 2. **Anatomical Subcortical MRI ROI Incremental Experiment:** Targeted statistical intensity features extracted from 16 Harvard-Oxford subcortical structures evaluated on a complete-case matched cohort ($N=564$).
 
 Across 3-repeat 5-fold cross-validation and paired participant bootstrap hypothesis testing ($B=2000$), FreeSurfer regional morphometry provides robust, statistically significant predictive improvement over clinical testing alone ($\Delta \text{AUROC} = +0.0391 \text{ to } +0.0433$, $p \le 0.0020$). Conversely, neither raw whole-volume 3D CNN embeddings ($\Delta \text{AUROC} = +0.0070$, $p = 0.2860$) nor targeted subcortical ROI intensity features ($\Delta \text{AUROC} = +0.0044$, $p = 0.2440$) yield a statistically significant performance gain beyond Clinical + FreeSurfer morphometry.
@@ -23,7 +23,7 @@ Across 3-repeat 5-fold cross-validation and paired participant bootstrap hypothe
 ## 3. Key Scientific Findings
 
 - **FreeSurfer Morphometry Adds Substantial Value:** Conditioning on 29 ICV-normalized FreeSurfer cortical thickness and subcortical volume features improves discrimination over clinical and cognitive testing alone from AUROC $0.8440$ to **$0.8787$** ($\Delta = \mathbf{+0.0391}$, 95% CI: $[+0.0154, +0.0638]$, empirical $p = \mathbf{0.0010}$) on the full development cohort ($N=622$), and from $0.8210$ to **$0.8643$** ($\Delta = \mathbf{+0.0433}$, $p = \mathbf{0.0020}$) on the matched cohort ($N=564$).
-- **Whole-Volume 3D CNN Yields Negligible Incremental Benefit:** Incorporating baseline 3D T1 MRI volumes into a compact cross-modal attention network increases AUROC from $0.8517$ (Model A: Clinical + FreeSurfer, MRI disabled) to **$0.8587$** (Model B: Clinical + FreeSurfer + 3D MRI). The paired difference of $\Delta = \mathbf{+0.0070}$ (95% CI: $[-0.0057, +0.0197]$) is not statistically significant ($p = \mathbf{0.2860}$).
+- **Whole-Volume 3D CNN Yields Negligible Incremental Benefit:** Incorporating baseline 3D T1 MRI volumes into a compact inter-modality self-attention network increases AUROC from $0.8517$ (Model A: Clinical + FreeSurfer, MRI disabled) to **$0.8587$** (Model B: Clinical + FreeSurfer + 3D MRI). The paired difference of $\Delta = \mathbf{+0.0070}$ (95% CI: $[-0.0057, +0.0197]$) is not statistically significant ($p = \mathbf{0.2860}$).
 - **Targeted Subcortical ROIs Confirm the Disconfirmation:** Restricting feature extraction to 16 biologically validated subcortical regions of interest yields an AUROC of **$0.8688$** compared to $0.8643$ for Clinical + FreeSurfer alone. The incremental gain of $\Delta = \mathbf{+0.0044}$ (95% CI: $[-0.0029, +0.0122]$, $p = \mathbf{0.2440}$) is not statistically significant.
 - **Robustness to Follow-Up Censoring:** Restricting negative follow-up strictly to participants with documented negative visits at $\ge 730$ days ($N=583$) elevates combined Clinical + FreeSurfer AUROC to **$0.8860$** (95% CI: $[0.8555, 0.9129]$, PR-AUC: $0.7502$), confirming that findings are not artifacts of right-censoring boundaries.
 - **Anatomical Intensity vs Volumetric Morphometry:** Pearson correlation between subcortical ROI intensity statistics and macroscopic FreeSurfer volume metrics is low-to-moderate ($r = 0.30 - 0.36$), confirming that tissue intensity and volumetric atrophy capture non-identical biological properties.
@@ -157,7 +157,7 @@ flowchart TD
     E --> EL["Eligible Study Cohort<br>N = 778<br>Converters: 172 (22.11%) | Non-Converters: 606"]
     EL --> DEV["Primary Development Cohort (80%)<br>N = 622<br>Converters: 144 (23.15%) | Non-Converters: 478<br>MRI Present: 564 | Missing MRI: 58"]
     EL --> HLD["Frozen Internal Holdout (20%)<br>N = 156<br>Converters: 28 (17.95%) | Non-Converters: 128<br>MRI Present: 140 | Missing MRI: 16"]
-    DEV --> MC["Matched Complete-Case Dev Cohort<br>N = 564 (100% MRI Available)<br>Converters: 124 (21.99%) | Non-Converters: 440"]
+    DEV --> MC["Matched Complete-Case Dev Cohort<br>N = 564 (100% MRI Available)<br>Converters: 123 (21.81%) | Non-Converters: 441"]
 ```
 
 - **Target Progression Event:** Progression from MCI at baseline to clinically confirmed Alzheimer's Disease dementia within 730 days (24 months) of anchor examination.
@@ -196,7 +196,7 @@ flowchart LR
     subgraph Image Branch
         M["3D T1 MRI<br>(91x109x91)"] --> CNN["4-Stage 3D CNN<br>Conv3D + BatchNorm + MaxPool<br>Global AvgPool -> Linear(->32)"]
     end
-    EC --> ATTN["Multi-Head Cross-Attention<br>(heads=2, dim=32, dropout=0.3)"]
+    EC --> ATTN["Inter-Modality Self-Attention<br>(heads=2, dim=32, dropout=0.3)"]
     EF --> ATTN
     CNN --> ATTN
     ATTN --> CLF["Classification Head<br>Linear(32->1) -> Sigmoid"]
@@ -204,10 +204,10 @@ flowchart LR
 ```
 
 1. **Tabular Regularized Baselines:** L2-regularized Logistic Regression and HistGradientBoosting classifiers with inner-fold nested grid search for regularization parameters ($C \in [10^{-3}, 10^{2}]$).
-2. **Multimodal Compact Cross-Attention Network:**
+2. **Multimodal Inter-Modality Self-Attention Network:**
    - Tabular projection branches map clinical and morphometric vectors into a shared 32-dimensional latent space.
    - 3D CNN branch comprises 4 blocks of $3 \times 3 \times 3$ convolutions, Batch Normalization, ReLU activations, and $2 \times 2 \times 2$ max-pooling, followed by 3D adaptive average pooling down to 32 dimensions.
-   - Fusion layer employs multi-head cross-attention ($h=2, d=32$) with residual connections and modality dropout ($p=0.3$).
+   - Fusion layer employs multi-head self-attention ($h=2, d=32$) operating across the sequence of modality tokens `[ec, ef, em]` with residual connections and modality dropout ($p=0.3$).
 3. **Subcortical ROI Fusion Model:** Ridge logistic regression with inner-fold feature scaling, PCA dimensionality reduction, and L2 probability calibration.
 
 ---
@@ -232,10 +232,10 @@ flowchart LR
 | **Non-Circular Clinical + FS** | Full Dev | 622 | 144 / 622 | 0.8615 | [0.8254, 0.8917] | 0.6762 | 0.1175 | **+0.0496** | **0.0010** | **Statistically Significant** |
 | **Whole-Volume 3D MRI (Model A)** | Full Dev | 622 | 144 / 622 | 0.8517 | [0.8142, 0.8872] | 0.6640 | 0.1392 | Control Ref | — | — |
 | **Whole-Volume 3D MRI (Model B)** | Full Dev | 622 | 144 / 622 | **0.8587** | [0.8219, 0.8936] | 0.6712 | 0.1354 | **+0.0070** | **0.2860** | **Not Significant** |
-| **Clinical Only (Matched)** | Matched Dev | 564 | 124 / 564 | 0.8210 | [0.7760, 0.8624] | 0.5488 | 0.1342 | Reference | — | — |
-| **Subcortical ROI (Model A: Clin+FS)**| Matched Dev | 564 | 124 / 564 | 0.8643 | [0.8260, 0.8992] | 0.6598 | 0.1132 | **+0.0433** | **0.0020** | **Statistically Significant** |
-| **Subcortical ROI (Model B: +ROIs)** | Matched Dev | 564 | 124 / 564 | **0.8688** | [0.8312, 0.9026] | 0.6756 | 0.1116 | **+0.0044** | **0.2440** | **Not Significant** |
-| **Negative Control ROIs (Model C)** | Matched Dev | 564 | 124 / 564 | 0.8640 | [0.8251, 0.8998] | 0.6671 | 0.1140 | -0.0003 | 0.8770 | Not Significant |
+| **Clinical Only (Matched)** | Matched Dev | 564 | 123 / 564 | 0.8210 | [0.7760, 0.8624] | 0.5488 | 0.1342 | Reference | — | — |
+| **Subcortical ROI (Model A: Clin+FS)**| Matched Dev | 564 | 123 / 564 | 0.8643 | [0.8260, 0.8992] | 0.6598 | 0.1132 | **+0.0433** | **0.0020** | **Statistically Significant** |
+| **Subcortical ROI (Model B: +ROIs)** | Matched Dev | 564 | 123 / 564 | **0.8688** | [0.8312, 0.9026] | 0.6756 | 0.1116 | **+0.0044** | **0.2440** | **Not Significant** |
+| **Negative Control ROIs (Model C)** | Matched Dev | 564 | 123 / 564 | 0.8640 | [0.8251, 0.8998] | 0.6671 | 0.1140 | -0.0003 | 0.8770 | Not Significant |
 | **3-Channel MRI (Exploratory)** | Full Dev | 622 | 144 / 622 | 0.8452 | [0.8089, 0.8840] | 0.6288 | 0.1406 | -0.0065 | — | Exploratory (Single-Repeat CV) |
 
 ---
@@ -406,19 +406,19 @@ For authorized researchers with access to the ADNI database, execute the 11 pipe
 
 ### Pipeline Command Validation Matrix
 
-| Step | Command | Required Input | Expected Output | Validation Status |
+| Step | Command | Required Input | Expected Output | Exact Validation Level |
 | :---: | :--- | :--- | :--- | :--- |
-| **1** | `python scripts/data_preparation/build_cohort.py` | `ADNIMERGE.csv`, `DXSUM_PDXCONV_ADNIALL.csv` | `data/processed/cohort_v2b.csv` | **Verified** (Syntax OK; expects raw ADNI tabular data) |
-| **2** | `python scripts/data_preparation/generate_splits.py` | `data/processed/cohort_v2b.csv` | `data/processed/splits/splits_v1.csv` | **Verified** (Syntax OK; splits verified by 4 unit tests) |
-| **3** | `python scripts/feature_extraction/extract_clinical_features.py` | `cohort_v2b.csv`, raw clinical CSVs | `data/processed/features/clinical_raw_v1.csv` | **Verified** (Syntax OK; feature schema tested) |
-| **4** | `python scripts/feature_extraction/extract_freesurfer_features.py` | `UCSFFSX7.csv`, `cohort_v2b.csv` | `data/processed/features/freesurfer29_raw_v1.csv` | **Verified** (Syntax OK; ICV normalization tested) |
-| **5** | `python scripts/preprocessing/preprocess_mri_volumes.py --roots <dir>` | Raw T1 DICOM/NIfTI directories | `data/interim/mri_mni2mm_v2/` | **Verified** (CLI `--help` clean exit 0; requires local scans + FSL) |
-| **6** | `python scripts/quality_control/audit_mri_quality.py` | `mri_mni2mm_v2/`, `cohort_v2b.csv` | Quality logs & outlier flags | **Verified** (Syntax OK; requires local scans + FSLDIR) |
-| **7** | `python scripts/feature_extraction/extract_mri_subcortical_rois.py` | `mri_mni2mm_v2/`, Harvard-Oxford atlas | `data/processed/features/mri_subcortical_roi_features.csv` | **Verified** (Syntax OK; requires preprocessed volumes) |
-| **8** | `bash scripts/run_tabular_suite.sh` | Processed clinical & FreeSurfer CSVs | Baseline out-of-fold predictions | **Verified** (Shell script & underlying `train_cv.py` compile OK) |
-| **9** | `python scripts/training/run_stage12_3repeat_ablation.py` | MRI tensors, clinical & FS29 CSVs, splits | `results/02_whole_volume_3d_mri/metrics.csv` | **Verified** (Syntax & imports OK; executes on CPU or MPS) |
-| **10** | `python scripts/training/run_stage19_mri_roi_incremental.py` | Subcortical ROI, clinical & FS29 CSVs | `results/03_subcortical_mri_roi/metrics.csv` | **Verified** (Syntax & imports OK; executes in ~2 min) |
-| **11** | `python scripts/evaluation/evaluate_paired_bootstrap.py --predictions_csv <f> --test_col <t> --ref_col <r>` | OOF prediction CSV | Paired delta, 95% CIs, and tail $p$-values | **Verified** (CLI `--help` clean exit 0; bootstrap tested) |
+| **1** | `python scripts/data_preparation/build_cohort.py` | `ADNIMERGE.csv`, `DXSUM_PDXCONV_ADNIALL.csv` | `data/processed/cohort_v2b.csv` | **Syntax & Imports Validated** (Requires raw ADNI clinical CSVs; tested via `test_cohort.py`) |
+| **2** | `python scripts/data_preparation/generate_splits.py` | `data/processed/cohort_v2b.csv` | `data/processed/splits/splits_v1.csv` | **Syntax & Logic Tested** (Partition outputs verified by 4 unit tests in `test_splits.py`) |
+| **3** | `python scripts/feature_extraction/extract_clinical_features.py` | `cohort_v2b.csv`, raw clinical CSVs | `data/processed/features/clinical_raw_v1.csv` | **Syntax & Schema Tested** (Output dimensions and boundaries verified by `test_features.py`) |
+| **4** | `python scripts/feature_extraction/extract_freesurfer_features.py` | `UCSFFSX7.csv`, `cohort_v2b.csv` | `data/processed/features/freesurfer29_raw_v1.csv` | **Syntax & Logic Tested** (ICV scaling and 29 features verified by `test_features.py`) |
+| **5** | `python scripts/preprocessing/preprocess_mri_volumes.py --roots <dir>` | Raw T1 DICOM/NIfTI directories | `data/interim/mri_mni2mm_v2/` | **CLI `--help` Tested (Exit 0)** (Full execution requires local scans + FSL toolchain) |
+| **6** | `python scripts/quality_control/audit_mri_quality.py` | `mri_mni2mm_v2/`, `cohort_v2b.csv` | Quality logs & outlier flags | **Syntax Validated** (Requires local preprocessed volumes + FSLDIR) |
+| **7** | `python scripts/feature_extraction/extract_mri_subcortical_rois.py` | `mri_mni2mm_v2/`, Harvard-Oxford atlas | `data/processed/features/mri_subcortical_roi_features.csv` | **Syntax & Extraction Tested** (Requires local preprocessed volumes) |
+| **8** | `bash scripts/run_tabular_suite.sh` | Processed clinical & FreeSurfer CSVs | Baseline out-of-fold predictions | **Executed End-to-End** (Underlying `src/training/train_cv.py` verified across folds) |
+| **9** | `python scripts/training/run_stage12_3repeat_ablation.py` | MRI tensors, clinical & FS29 CSVs, splits | `results/02_whole_volume_3d_mri/metrics.csv` | **Executed End-to-End** (Completed 30 model runs on CPU, logged in `config.json`) |
+| **10** | `python scripts/training/run_stage19_mri_roi_incremental.py` | Subcortical ROI, clinical & FS29 CSVs | `results/03_subcortical_mri_roi/metrics.csv` | **Executed End-to-End** (Completed 30 model runs on CPU in ~2 min) |
+| **11** | `python scripts/evaluation/evaluate_paired_bootstrap.py --predictions_csv <f> --test_col <t> --ref_col <r>` | OOF prediction CSV | Paired delta, 95% CIs, and tail $p$-values | **Executed & CLI Tested (Exit 0)** (Bootstrap engine tested by `test_evaluation.py`) |
 
 ---
 

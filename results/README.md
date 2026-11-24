@@ -35,7 +35,7 @@ To ensure accurate interpretation and prevent methodological conflation, readers
   - All 622 participants have complete Clinical and FreeSurfer tabular data.
   - 564 participants have baseline 3D T1 MRI scans; 58 participants have missing MRI.
   - In `02_whole_volume_3d_mri`, missing MRI scans are zero-masked and handled via explicit modality availability indicators and attention dropout ($p=0.3$).
-- **Matched Complete-Case Cohort ($N=564$, 124 converters, 440 non-converters):**
+- **Matched Complete-Case Cohort ($N=564$, 123 converters, 441 non-converters):**
   - Used in `03_subcortical_mri_roi`.
   - Exactly restricts analysis to participants who have verified baseline 3D T1 MRI scans.
   - Eliminates all missingness imputation, masking, or indicator variables, providing an unambiguous matched comparison.

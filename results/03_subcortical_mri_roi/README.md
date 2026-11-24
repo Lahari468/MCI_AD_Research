@@ -10,7 +10,7 @@ To ensure complete fairness and eliminate any missing-data confounding, this exp
 
 ## Experimental Setup
 
-- **Cohort:** Matched complete-case cohort of 564 participants (124 converters, 440 non-converters; conversion rate: 21.99%).
+- **Cohort:** Matched complete-case cohort of 564 participants (123 converters, 441 non-converters; conversion rate: 21.81%).
 - **Feature Extraction:** 6 robust intensity statistics (mean, standard deviation, 5th percentile, 95th percentile, median, IQR) extracted per ROI from skull-stripped, MNI152-registered T1 volumes.
 - **Dimensionality Reduction:** Ridge logistic regression and PCA inside inner folds to prevent data leakage.
 - **Biological Redundancy Check:** Pearson correlation between subcortical ROI intensity features and corresponding FreeSurfer volume features showed modest correlation ($r \approx 0.30 - 0.36$), confirming that tissue intensity contrast is non-identical to macroscopic volumetric atrophy.

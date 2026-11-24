@@ -4,9 +4,9 @@
   "cohort": {
     "cohort_type": "complete_case_mri_matched",
     "sample_size": 564,
-    "converters": 124,
-    "non_converters": 440,
-    "conversion_prevalence_pct": 21.99,
+    "converters": 123,
+    "non_converters": 441,
+    "conversion_prevalence_pct": 21.81,
     "mri_availability": "100% (564/564 verified baseline scans present, zero imputation or masking needed)"
   },
   "extracted_features": {

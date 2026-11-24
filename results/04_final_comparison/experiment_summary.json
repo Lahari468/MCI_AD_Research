@@ -15,7 +15,7 @@
       },
       {
         "approach": "Anatomical Subcortical MRI ROI Incremental Experiment (Harvard-Oxford Atlas Intensity)",
-        "cohort": "Complete-Case Matched Cohort (N=564, 124 converters)",
+        "cohort": "Complete-Case Matched Cohort (N=564, 123 converters)",
         "control_model_auroc": 0.8643,
         "mri_model_auroc": 0.8688,
         "delta_auroc": 0.0044,

@@ -35,7 +35,7 @@ def recode_negative_values(df: pd.DataFrame, col: str) -> tuple[pd.Series, pd.Se
 
 
 def parse_rid_from_ptid(ptid_val: Any) -> int | None:
-    """Extract numeric RID from PTID string (e.g. '011_S_0010' -> 10)."""
+    """Extract numeric RID from PTID string (e.g. '000_S_0000' -> 0)."""
     if pd.isna(ptid_val):
         return None
     s = str(ptid_val).strip()

@@ -6,11 +6,11 @@ This directory documents the 3-repeat, 5-fold cross-validation ablation experime
 
 - **Cohort:** Primary development cohort of 622 participants (144 converters, 478 non-converters), of whom 564 have baseline 3D T1-weighted MRI scans and 58 have missing MRI.
 - **Handling MRI Missingness:** Participants without MRI scans have their MRI tensor zero-masked, coupled with an explicit binary availability indicator and attention dropout ($p=0.3$) to prevent the network from developing spurious dependencies on missingness artifacts.
-- **Architecture:** Compact multimodal cross-modal attention network:
+- **Architecture:** Compact multimodal inter-modality self-attention network:
   - Tabular Clinical Encoder: Linear projection to $d=32$.
   - FreeSurfer Encoder: Linear projection to $d=32$.
   - 3D MRI Branch: 4-stage 3D ConvNet with spatial downsampling to 32-dimensional embedding (743,665 total parameters in Model B vs 106,753 in Model A).
-  - Fusion: Multi-head cross-attention ($h=2$, $d=32$) with residual connections.
+  - Fusion: Multi-head self-attention ($h=2$, $d=32$) across modality tokens `[ec, ef, em]` with residual connections and modality dropout.
 - **Protocol:** Identical 3-repeat 5-fold cross-validation (30 model runs: 15 for Model A, 15 for Model B) across fixed partition seeds (0, 1, 2) and identical initialization. Out-of-fold predictions were averaged across the 3 repeats.
 
 ## Empirical Findings

@@ -1,5 +1,5 @@
 """
-Multimodal Cross-Attention Fusion Network
+Multimodal Inter-Modality Self-Attention Fusion Network
 Module: src/models/multimodal_fusion.py
 Implements Stage 12 Model A (MRI excluded) and Model B (MRI included).
 """
@@ -12,7 +12,7 @@ from src.models.cnn3d import CNN3D
 
 class MultimodalAttentionNetwork(nn.Module):
     """
-    Multimodal Compact Cross-Attention Network with Missingness Conditioning.
+    Multimodal Compact Inter-Modality Self-Attention Network with Missingness Conditioning.
     Fuses Clinical (10), FreeSurfer (29), and 3D MRI (volumetric) modalities.
     """
     def __init__(
