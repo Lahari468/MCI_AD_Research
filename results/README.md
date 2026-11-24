@@ -45,7 +45,7 @@ To ensure accurate interpretation and prevent methodological conflation, readers
 
 ### 2. Metric Distinctions: Mean-Repeat AUROC vs Pooled Repeat-Averaged AUROC
 Across multi-repeat cross-validation protocols, two distinct summary statistics are reported:
-- **Repeat Mean AUROC ($\text{AUROC}_{\text{rep\_mean}} \pm \text{SD}$):** The arithmetic mean of the fold-averaged AUROCs computed separately within each repeat.
+- **Repeat Mean AUROC $\mathrm{AUROC}_{\mathrm{rep\_mean}} \pm \mathrm{SD}$:** The arithmetic mean of the fold-averaged AUROCs computed separately within each repeat.
 - **Pooled Repeat-Averaged AUROC ($\text{AUROC}_{\text{pooled}}$):** The AUROC computed once across all participants after averaging their predicted out-of-fold probabilities across all repeats.
 - **Why They Differ:** Averaging predicted probabilities across seeds smooths out fold boundary variance, typically yielding slightly higher discrimination (e.g., $0.876 \pm 0.006$ repeat mean vs **$0.8787$** pooled repeat-averaged AUROC for Clinical + FS29 on $N=622$). Both metrics are reported in all summary tables for full transparency.
 
