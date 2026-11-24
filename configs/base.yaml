@@ -1,0 +1,75 @@
+# Global Configuration for MCI to AD Progression Research
+# Project: MCI_AD_Research
+
+project:
+  name: "MCI_AD_Research"
+  version: "1.0.0"
+  description: "Multimodal prediction of MCI progression to Alzheimer's Disease within a 730-day horizon"
+
+system:
+  seed: 42
+  deterministic: true
+  hardware:
+    accelerator: "mps"      # Apple Silicon Metal Performance Shaders (MPS)
+    num_workers: 4
+    pin_memory: true
+
+paths:
+  root: "."
+  data:
+    raw:
+      clinical: "data/raw/clinical"
+      freesurfer: "data/raw/freesurfer"
+      mri: "data/raw/mri"
+    interim: "data/interim"
+    processed: "data/processed"
+  configs: "configs"
+  experiments: "experiments"
+  checkpoints: "checkpoints"
+  results: "results"
+  logs: "logs"
+  reports: "reports"
+  tests: "tests"
+
+cohort:
+  baseline_diagnosis_code: 2         # PHC_Diagnosis = 2 (MCI) at index visit
+  conversion_ad_code: 3              # PHC_Diagnosis = 3 (AD)
+  conversion_non_ad_code: 4          # PHC_Diagnosis = 4 (Non-AD dementia)
+  conversion_other_code: 5           # PHC_Diagnosis = 5 (Other Cognitive Diagnosis)
+  prediction_horizon_days: 730       # 2-year window (T_anchor, T_anchor+730 d]
+  primary_negative_min_days: 640     # Qualifying primary negative follow-up visit >= 640 d
+  crosscheck_horizon_days: 910       # Discrepancy & competing check window (T_anchor, T_anchor+910 d]
+  
+  # Sensitivity outcome rules
+  sens_pos_max_days: 820             # First AD event within (T0, T0+820 d]
+  sens_neg_ge550_days: 550           # Follow-up visit >= 550 d without AD <= 730 d
+  sens_neg_symm90_min_days: 640      # Symmetric +/- 90 d around day 730 [640, 820]
+  sens_neg_symm90_max_days: 820
+  sens_neg_symm180_min_days: 550     # Symmetric +/- 180 d around day 730 [550, 910]
+  sens_neg_symm180_max_days: 910
+  sens_neg_ge730_days: 730           # Follow-up visit >= 730 d without AD <= 730 d
+
+  # Predictor alignment windows relative to index visit
+  clinical_window_pre_days: 90       # [index visit - 90 d, index visit]
+  clinical_window_post_days: 0
+  imaging_window_pre_days: 180       # [index visit - 180 d, index visit + 90 d]
+  imaging_window_post_days: 90
+
+  # Target FreeSurfer morphometric features (bilateral entorhinal + hippocampus)
+  target_freesurfer_features:
+    - "ST24CV"
+    - "ST24SA"
+    - "ST24TA"
+    - "ST24TS"
+    - "ST29SV"
+    - "ST83CV"
+    - "ST83SA"
+    - "ST83TA"
+    - "ST83TS"
+    - "ST88SV"
+
+mri:
+  target_spacing: [1.0, 1.0, 1.0] # mm isotropic
+  target_shape: [160, 192, 160]
+  intensity_normalization: "zscore"
+  skull_strip_method: "synthstrip" # Options: synthstrip, fsl_bet

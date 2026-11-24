@@ -1,0 +1,23 @@
+name: mci_ad_research
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9.6
+  - pip
+  - numpy=2.0.2
+  - pandas=2.3.3
+  - scikit-learn=1.6.1
+  - scipy
+  - matplotlib=3.9.4
+  - seaborn=0.13.2
+  - pyyaml=6.0.3
+  - pydantic=2.7.4
+  - pytest=8.4.2
+  - pip:
+      - torch==2.8.0
+      - nibabel==5.3.3
+      - pydicom==2.4.4
+      - SimpleITK==2.5.7
+      - monai>=1.4.0

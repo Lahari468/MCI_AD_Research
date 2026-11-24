@@ -1,0 +1,32 @@
+# configs/paths.yaml - Centralized Portable Path Configuration
+project_root: "${PROJECT_ROOT:-.}"
+fsldir: "${FSLDIR:-}"
+
+data:
+  raw:
+    clinical: "data/raw/clinical"
+    freesurfer: "data/raw/freesurfer"
+    mri_roots:
+      - "data/raw/mri/batch1_combined"
+      - "data/raw/mri/batch2_combined"
+      - "data/raw/mri/batch3_combined"
+  interim:
+    tensors_v2: "data/interim/mri_mni2mm_v2"
+    tensors_qcfail: "data/interim/mri_mni2mm_v2_qcfail"
+  processed:
+    cohort: "data/processed/cohort_v2b.csv"
+    splits: "data/processed/splits/splits_v1.csv"
+    features_clinical: "data/processed/features/clinical_raw_v1.csv"
+    features_fs29: "data/processed/features/freesurfer29_raw_v1.csv"
+    features_roi: "data/processed/features/mri_subcortical_roi_features.csv"
+    mri_manifest: "data/processed/mri/manifests/mri_manifest_713.csv"
+
+reference:
+  atlases:
+    harvard_oxford_subcortical: "data/reference/atlases/HarvardOxford-sub-maxprob-thr25-2mm.nii.gz"
+    mni152_brain_mask: "data/reference/atlases/MNI152_T1_2mm_brain_mask.nii.gz"
+
+results:
+  summary_tables: "results/summary_tables"
+  figures: "results/figures"
+  experiment_summaries: "results/experiment_summaries"

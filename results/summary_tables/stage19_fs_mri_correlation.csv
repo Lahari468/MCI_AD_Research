@@ -1,0 +1,5 @@
+structure,roi_feature,fs_column,pearson_r
+Left Hippocampus,hippo_left_median,ST29SV,0.3002
+Right Hippocampus,hippo_right_median,ST88SV,0.3132
+Left Lateral Ventricle,latvent_left_median,ST37SV,-0.3622
+Right Lateral Ventricle,latvent_right_median,ST96SV,-0.3661

@@ -1,0 +1,31 @@
+# MRI Preprocessing Pipeline Configuration
+preprocessing:
+  dicom_to_nifti:
+    tool: "dcm2niix"
+    flags: ["-z", "y", "-i", "y"]
+  reorientation:
+    tool: "fslreorient2std"
+  field_of_view:
+    tool: "robustfov"
+  bias_field_correction:
+    method: "N4ITK"
+    shrink_factor: 4
+    max_iterations: [30, 20, 10]
+  spatial_registration:
+    tool: "flirt"
+    degrees_of_freedom: 12
+    cost_function: "normcorr"
+    interpolation: "trilinear"
+    reference_template: "MNI152_T1_2mm.nii.gz"
+    reference_dimensions: [91, 109, 91]
+    voxel_resolution_mm: [2.0, 2.0, 2.0]
+  intensity_normalization:
+    brain_mask: "MNI152_T1_2mm_brain_mask.nii.gz"
+    clipping_percentiles: [0.5, 99.5]
+    scaling: "z_score_brain_masked"
+    dtype: "float16"
+  quality_control_thresholds:
+    min_normalized_cross_correlation: 0.20
+    review_normalized_cross_correlation: 0.30
+    scale_factor_range: [0.70, 1.40]
+    max_rotation_degrees: 45.0

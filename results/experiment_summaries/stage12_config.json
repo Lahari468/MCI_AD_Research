@@ -1,0 +1,40 @@
+{
+  "experiment": "Stage 12 Three-Repeat Matched MRI Ablation",
+  "timestamp": "2026-11-23 21:32:29",
+  "device": "cpu",
+  "cohort_n": 622,
+  "cohort_pos": 144,
+  "cohort_neg": 478,
+  "model_a": {
+    "name": "model_a_clin_fs",
+    "description": "Clinical + FreeSurfer FS29 Compact Attention (No MRI)",
+    "parameters": 106753,
+    "use_mri": false,
+    "use_fs": true
+  },
+  "model_b": {
+    "name": "model_b_clin_mri_fs",
+    "description": "Clinical + FreeSurfer FS29 + Baseline 3D MRI Compact Attention",
+    "parameters": 743665,
+    "use_mri": true,
+    "use_fs": true
+  },
+  "hyperparameters": {
+    "dim": 32,
+    "heads": 2,
+    "lr": 0.0001,
+    "wd": 0.005,
+    "bs": 8,
+    "mask_p": 0.3,
+    "patience": 8,
+    "epochs": 60
+  },
+  "shared_weights_identical_initialization": true,
+  "repeats": [
+    0,
+    1,
+    2
+  ],
+  "folds_per_repeat": 5,
+  "total_runs": 30
+}

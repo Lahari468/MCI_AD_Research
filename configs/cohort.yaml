@@ -1,0 +1,25 @@
+# Cohort Construction & Eligibility Configuration
+cohort:
+  name: "ADNI MCI 24-Month Progression Cohort"
+  target_population: "Mild Cognitive Impairment (MCI: LMCI, EMCI)"
+  baseline_criteria:
+    min_age: 55.0
+    max_age: 90.0
+    baseline_diagnosis: ["MCI", "LMCI", "EMCI"]
+    require_valid_cdr: true
+    require_valid_mmse: true
+  progression_outcome:
+    target_event: "MCI to Alzheimer's Disease Progression (Dementia)"
+    follow_up_horizon_days: 730  # 24 months
+    label_primary_column: "label_primary"
+  exclusion_rules:
+    - "Conversion to non-AD dementia or reversion to cognitively normal"
+    - "Missing baseline clinical assessments (MMSE, CDR-SB, FAQ, ADAS)"
+    - "Follow-up censored before 730 days without observed conversion"
+  split_design:
+    strategy: "Stratified Multi-Repeat K-Fold Cross-Validation"
+    repeats: 3
+    folds_per_repeat: 5
+    development_n: 622
+    development_mri_matched_n: 564
+    locked_internal_holdout_n: 156

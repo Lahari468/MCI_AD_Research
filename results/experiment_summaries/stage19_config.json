@@ -1,0 +1,32 @@
+{
+  "experiment": "Targeted MRI Subcortical ROI Incremental Experiment",
+  "timestamp": "2026-11-23 22:48:13",
+  "cohort_n": 564,
+  "cohort_pos": 123,
+  "cohort_neg": 441,
+  "prevalence": 0.21808510638297873,
+  "models_evaluated": [
+    "clin_only",
+    "model_a_clin_fs",
+    "model_b_clin_fs_roi",
+    "model_c_clin_fs_roi_ctrl",
+    "mri_roi_only"
+  ],
+  "c_grid": [
+    0.001,
+    0.01,
+    0.05,
+    0.1,
+    0.5,
+    1.0,
+    5.0,
+    10.0
+  ],
+  "repeats": [
+    0,
+    1,
+    2
+  ],
+  "folds_per_repeat": 5,
+  "total_runs_per_model": 15
+}

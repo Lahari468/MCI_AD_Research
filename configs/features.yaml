@@ -1,0 +1,57 @@
+# Feature Extraction & Representation Definitions
+features:
+  clinical:
+    count: 10
+    columns:
+      - "age"
+      - "sex"
+      - "PTEDUCAT"
+      - "APOE4"
+      - "MMSCORE"
+      - "CDRSB"
+      - "CDGLOBAL"
+      - "FAQTOTAL"
+      - "TOTSCORE"
+      - "TOTAL13"
+  freesurfer:
+    count: 29
+    regex_pattern: "^ST\\d+(SV|TA|CV)$"
+    intracranial_volume_column: "ST10CV"
+    normalization: "volume_ratio_per_1000_icv" # X / ST10CV * 1000.0 for SV columns
+  mri_subcortical_rois:
+    atlas: "Harvard-Oxford Subcortical Structural Atlas"
+    reference_tissue: "bilateral_cerebral_white_matter"
+    white_matter_labels: [1, 12]
+    target_structures:
+      hippocampus: [9, 19]
+      amygdala: [10, 20]
+      lateral_ventricles: [3, 14]
+    control_structures:
+      thalamus: [4, 15]
+      caudate: [5, 16]
+      putamen: [6, 17]
+    extracted_features_primary_count: 16
+    primary_columns:
+      - "hippo_left_median"
+      - "hippo_right_median"
+      - "hippo_bilateral_median"
+      - "hippo_left_std"
+      - "hippo_right_std"
+      - "amygdala_left_median"
+      - "amygdala_right_median"
+      - "amygdala_bilateral_median"
+      - "amygdala_left_std"
+      - "amygdala_right_std"
+      - "latvent_left_median"
+      - "latvent_right_median"
+      - "latvent_bilateral_median"
+      - "latvent_left_std"
+      - "latvent_right_std"
+      - "vent_to_hippo_diff"
+    control_columns:
+      - "thalamus_left_median"
+      - "thalamus_right_median"
+      - "caudate_left_median"
+      - "caudate_right_median"
+      - "putamen_left_median"
+      - "putamen_right_median"

@@ -1,0 +1,37 @@
+# Multimodal Compact Cross-Attention Network (Stage 12)
+model:
+  name: "Multimodal Attention Network"
+  latent_dimension: 32
+  num_attention_heads: 2
+  attention_dropout: 0.10
+  encoders:
+    clinical_mlp:
+      input_dim: 10
+      hidden_dims: [128, 256, 32]
+      dropouts: [0.30, 0.20, 0.10]
+      activation: "gelu"
+      normalization: "layer_norm"
+    freesurfer_mlp:
+      input_dim: 29
+      hidden_dims: [128, 256, 32]
+      dropouts: [0.30, 0.20, 0.10]
+      activation: "gelu"
+      normalization: "layer_norm"
+    mri_cnn3d:
+      input_channels: 1
+      channel_widths: [16, 32, 64, 96]
+      kernel_size: 3
+      normalization: "group_norm_4"
+      activation: "gelu"
+      pooling: "cat_mean_max"
+      output_dim: 32
+  fusion:
+    ffn_dim: 64
+    fusion_hidden_dims: [64, 32]
+    fusion_dropouts: [0.40, 0.30]
+  conditioning:
+    modality_presence_mask: true
+    missingness_aware: true
+  parameters:
+    model_a_mri_excluded: 159105
+    model_b_mri_included: 509921

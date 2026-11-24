@@ -1,0 +1,5 @@
+contrast,test_model,ref_model,test_auroc,ref_auroc,delta_auroc,ci_auroc_lo,ci_auroc_hi,p_auroc,delta_prauc,ci_prauc_lo,ci_prauc_hi,p_prauc,delta_brier,ci_brier_lo,ci_brier_hi,p_brier
+Primary: Model B (Clin+FS+ROI) minus Model A (Clin+FS),Model B (Clin+FS+ROI),Model A (Clin+FS),0.8688,0.8643,0.0044,-0.0029,0.0122,0.244,0.0158,-0.0108,0.0391,0.273,-0.0015,-0.0046,0.0016,0.342
+Secondary: Model C (Clin+FS+ROI+Control) minus Model A (Clin+FS),Model C (+Control ROIs),Model A (Clin+FS),0.864,0.8643,-0.0003,-0.0093,0.0091,0.877,0.0073,-0.032,0.0406,0.834,0.0008,-0.0025,0.0042,0.626
+Baseline Validation: Model A (Clin+FS) minus Clinical Only,Model A (Clin+FS),Clinical Only,0.8643,0.821,0.0433,0.0135,0.0747,0.002,0.111,0.0325,0.1846,0.004,-0.0211,-0.0307,-0.0116,0.0
+Secondary: Nonlinear GBM (Clin+FS+ROI) minus Model A (Clin+FS),Nonlinear GBM (+ROI),Model A (Clin+FS),0.8616,0.8643,-0.0028,-0.0212,0.0158,0.756,0.0057,-0.0532,0.0579,0.896,0.0008,-0.0069,0.0083,0.863

@@ -1,0 +1,15 @@
+comparison,subset,repeat,n,pos,dAUROC,lo,hi,dPRAUC,plo,phi
+FreeSurfer increment (LR clinical+fs29 minus LR clinical),all,avg of 3,622,144,0.033,0.011,0.058,0.101,0.037,0.163
+Attention minus concat,all,avg of 3,622,144,0.004,-0.006,0.015,0.005,-0.027,0.035
+Attention minus LR,all,avg of 3,622,144,-0.026,-0.048,-0.005,-0.018,-0.065,0.03
+Paper-scale attention minus LR,all,avg of 3,622,144,-0.013,-0.027,0.001,-0.033,-0.089,0.021
+Paper-scale minus reduced attention,all,avg of 3,622,144,0.013,-0.007,0.035,-0.015,-0.065,0.035
+Experts K=5 minus K=1 (with modality dropout),all,avg of 3,622,144,0.006,-0.011,0.023,0.005,-0.054,0.063
+Modality dropout minus none (attention),all,avg of 3,622,144,-0.012,-0.026,0.001,-0.039,-0.083,0.003
+No-circular minus full clinical (LR+fs29),all,avg of 3,622,144,-0.012,-0.025,0.001,-0.022,-0.047,0.003
+Attention with FS masked minus LR clinical-only,all,avg of 3,622,144,-0.019,-0.04,0.001,-0.038,-0.099,0.034
+"MRI increment 1ch, dropout (full minus MRI masked)",mri,0,564,123,0.003,-0.003,0.011,0.034,0.01,0.063
+"MRI increment 1ch, no dropout",mri,0,564,123,0.0,-0.008,0.01,-0.003,-0.016,0.01
+"MRI increment 3ch, dropout",mri,0,564,123,-0.003,-0.013,0.006,0.002,-0.024,0.028
+"MRI model (1ch, dropout) minus LR, MRI present",mri,0,564,123,-0.042,-0.076,-0.008,-0.026,-0.099,0.05
+"MRI model (1ch, dropout) minus LR, MRI absent",nomri,0,58,21,-0.019,-0.08,0.044,-0.061,-0.169,0.114

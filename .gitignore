@@ -1,0 +1,105 @@
+# ==============================================================================
+# STRICT RESEARCH DATA & PRIVACY PROTECTION (.gitignore)
+# ==============================================================================
+
+# 1. Medical Imaging and Raw / Intermediate Data (Strictly Proprietary to ADNI)
+/data/
+01_raw_metadata/
+02_clinical/
+03_freesurfer/
+04_mri_metadata/
+05_genetics/
+06_audit_outputs/
+*.dcm
+*.DCM
+*.nii
+*.nii.gz
+*.npy
+*.npz
+
+# 2. Model Checkpoints & Large Weights
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.bin
+results/deep/*.pt
+results/stage12_3repeat/checkpoints/
+results/stage10/checkpoints/
+
+# 3. Participant-Level Datasets and Out-Of-Fold Prediction Files
+*oof_predictions.csv
+*participant_predictions.csv
+*predictions_fold*.csv
+results/mri_v2/qc/
+results/mri_v2/qc_lowest20.png
+results/mri_v2/audit_*.png
+results/inventory/dicom_series_headers.csv
+results/inventory/dicom_subject_summary.csv
+
+# 4. Logs, Outputs, and Scratch Files
+logs/
+*.log
+scratch/
+*_stdout.txt
+
+# 5. Virtual Environments and Local Configurations
+.venv/
+.venv2/
+env/
+venv/
+ENV/
+.env
+.env.*
+*.local
+
+# 6. Python Artifacts & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 7. Jupyter & IDE Artifacts
+.ipynb_checkpoints
+.idea/
+.vscode/
+
+# 8. OS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Desktop.ini
+Thumbs.db
+
+# 9. Local Intermediate Result Directories (Exclude Everything Except Curated Publishable Results)
+results/*
+!results/summary_tables/
+!results/summary_tables/**
+!results/figures/
+!results/figures/**
+!results/experiment_summaries/
+!results/experiment_summaries/**
+
+# Synthetic Demo Generated Data
+examples/synthetic_data_example/data/

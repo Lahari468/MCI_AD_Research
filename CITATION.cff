@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this research codebase, please cite it as below."
+title: "Evaluating the Incremental Predictive Value of Baseline 3D MRI Beyond Clinical and FreeSurfer Morphometry for 24-Month MCI-to-Alzheimer's Disease Progression"
+authors:
+  - family-names: "Kadiyala"
+    given-names: "Jaya Lahari"
+date-released: 2026-11-24
+repository-code: "https://github.com/Lahari468/MCI_AD_Research"
+keywords:
+  - "Mild Cognitive Impairment"
+  - "Alzheimer's Disease"
+  - "Multimodal Deep Learning"
+  - "Structural MRI"
+  - "FreeSurfer Morphometry"
+  - "Cross-Modal Attention"
+  - "Ablation Study"

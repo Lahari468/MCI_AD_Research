@@ -1,0 +1,17 @@
+# Example Configuration for Testing and Synthetic Pipeline Execution
+experiment:
+  name: "Synthetic MCI Progression Pipeline Demonstration"
+  random_seed: 42
+  num_synthetic_samples: 50
+  progression_prevalence: 0.22
+
+features:
+  clinical_dim: 10
+  freesurfer_dim: 29
+  mri_spatial_shape: [32, 32, 32] # Downsampled volume for rapid demonstration
+
+training:
+  models_to_run: ["clinical_only", "clinical_fs", "multimodal_attention"]
+  epochs: 2
+  batch_size: 8
+  learning_rate: 0.001
