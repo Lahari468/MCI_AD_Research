@@ -1,0 +1,55 @@
+{
+  "experiment_name": "03_subcortical_mri_roi",
+  "approach": "Anatomical Subcortical MRI ROI Incremental Experiment",
+  "cohort": {
+    "cohort_type": "complete_case_mri_matched",
+    "sample_size": 564,
+    "converters": 124,
+    "non_converters": 440,
+    "conversion_prevalence_pct": 21.99,
+    "mri_availability": "100% (564/564 verified baseline scans present, zero imputation or masking needed)"
+  },
+  "extracted_features": {
+    "atlas": "Harvard-Oxford Subcortical Structural Atlas (MNI152 2mm)",
+    "target_structures": [
+      "Left/Right Hippocampus",
+      "Left/Right Amygdala",
+      "Left/Right Thalamus",
+      "Left/Right Caudate",
+      "Left/Right Putamen",
+      "Left/Right Pallidum",
+      "Left/Right Accumbens",
+      "Left/Right Lateral Ventricle"
+    ],
+    "negative_control_structures": [
+      "Left/Right Precentral Gyrus",
+      "Brainstem"
+    ],
+    "statistics_per_roi": ["mean", "std", "p5", "p95", "median", "iqr"]
+  },
+  "protocol": {
+    "repeats": 3,
+    "folds_per_repeat": 5,
+    "total_models_per_approach": 15,
+    "bootstrap_replicates": 2000,
+    "random_seed": 42
+  },
+  "primary_contrasts": [
+    {
+      "contrast": "Model B (Clin+FS+ROI) minus Model A (Clin+FS)",
+      "delta_auroc": 0.0044,
+      "ci_95": [-0.0029, 0.0122],
+      "p_value": 0.2440,
+      "significant": false,
+      "scientific_conclusion": "Incremental value of subcortical MRI ROI intensity features over Clinical+FS is not statistically significant."
+    },
+    {
+      "contrast": "Model A (Clin+FS) minus Clinical Only",
+      "delta_auroc": 0.0433,
+      "ci_95": [0.0135, 0.0747],
+      "p_value": 0.0020,
+      "significant": true,
+      "scientific_conclusion": "Incremental value of FreeSurfer morphometry over Clinical alone is highly statistically significant."
+    }
+  ]
+}

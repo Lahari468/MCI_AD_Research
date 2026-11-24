@@ -1,0 +1,37 @@
+{
+  "experiment_name": "04_final_comparison",
+  "meta_synthesis": {
+    "research_question": "Does baseline 3D MRI provide statistically defensible incremental predictive value beyond clinical evaluation and FreeSurfer morphometry for 24-month MCI-to-AD progression?",
+    "summary_of_evidence": [
+      {
+        "approach": "Whole-Volume 3D MRI Ablation (3D CNN + Cross-Modal Attention)",
+        "cohort": "Full Development Cohort (N=622, 144 converters)",
+        "control_model_auroc": 0.8517,
+        "mri_model_auroc": 0.8587,
+        "delta_auroc": 0.0070,
+        "ci_95": [-0.0057, 0.0197],
+        "p_value": 0.2860,
+        "significance": "Not Statistically Significant"
+      },
+      {
+        "approach": "Anatomical Subcortical MRI ROI Incremental Experiment (Harvard-Oxford Atlas Intensity)",
+        "cohort": "Complete-Case Matched Cohort (N=564, 124 converters)",
+        "control_model_auroc": 0.8643,
+        "mri_model_auroc": 0.8688,
+        "delta_auroc": 0.0044,
+        "ci_95": [-0.0029, 0.0122],
+        "p_value": 0.2440,
+        "significance": "Not Statistically Significant"
+      },
+      {
+        "approach": "FreeSurfer Morphometry Incremental Value (Over Clinical Alone)",
+        "cohorts_tested": "N=622 (delta=+0.0391, p=0.001) and N=564 (delta=+0.0433, p=0.002)",
+        "significance": "Statistically Significant Across All Cohorts and Protocols"
+      }
+    ],
+    "conclusions": {
+      "scientific_claim": "Neither raw whole-volume 3D MRI nor targeted subcortical MRI intensity features provide a statistically significant incremental benefit beyond Clinical tests and FreeSurfer regional morphometry.",
+      "nuance": "This does not imply that MRI lacks biological value. Rather, when high-quality regional morphometry (FreeSurfer) is already extracted and combined with cognitive scales, the residual predictive information contained in baseline T1 MRI intensity is small and undetectable given standard clinical sample sizes."
+    }
+  }
+}

@@ -1,0 +1,10 @@
+experiment_series,approach_name,cohort_type,cohort_n,converters,non_converters,auroc_pooled,ci_lo,ci_hi,prauc,brier,incremental_delta_auroc,delta_ci_lo,delta_ci_hi,p_value,statistical_significance
+00_baselines,Clinical_Only_LR,full_development,622,144,478,0.8440,0.8100,0.8780,0.6070,0.1300,baseline_ref,NA,NA,NA,NA
+00_baselines,FreeSurfer_Only_LR,full_development,622,144,478,0.8131,0.7704,0.8492,0.5958,0.1345,-0.0309,NA,NA,NA,NA
+00_baselines,Clinical_plus_FS29_LR_3Repeat,full_development,622,144,478,0.8787,0.8464,0.9050,0.7088,0.1120,+0.0391,0.0154,0.0638,0.0010,Significant
+01_feature_ablation,Strict_Followup_ge730d,strict_negative_followup,583,144,439,0.8860,0.8555,0.9129,0.7502,0.1080,+0.0335,0.0070,0.0595,0.0020,Significant
+02_whole_volume_3d_mri,Model_A_Clin_FS_NoMRI,full_development,622,144,478,0.8517,0.8142,0.8872,0.6640,0.1392,control_ref,NA,NA,NA,NA
+02_whole_volume_3d_mri,Model_B_Clin_FS_3DMRI,full_development,622,144,478,0.8587,0.8219,0.8936,0.6712,0.1354,+0.0070,-0.0057,0.0197,0.2860,Not Significant
+03_subcortical_mri_roi,Clinical_Only_Matched,complete_case_mri,564,124,440,0.8210,0.7760,0.8624,0.5488,0.1342,-0.0433,-0.0747,-0.0135,0.0020,Significant (favors FS)
+03_subcortical_mri_roi,Model_A_Clin_FS,complete_case_mri,564,124,440,0.8643,0.8260,0.8992,0.6598,0.1132,control_ref,NA,NA,NA,NA
+03_subcortical_mri_roi,Model_B_Clin_FS_ROI,complete_case_mri,564,124,440,0.8688,0.8312,0.9026,0.6756,0.1116,+0.0044,-0.0029,0.0122,0.2440,Not Significant

@@ -94,12 +94,25 @@ Thumbs.db
 
 # 9. Local Intermediate Result Directories (Exclude Everything Except Curated Publishable Results)
 results/*
-!results/summary_tables/
-!results/summary_tables/**
+!results/README.md
+!results/00_baselines/
+!results/00_baselines/**
+!results/01_feature_ablation/
+!results/01_feature_ablation/**
+!results/02_whole_volume_3d_mri/
+!results/02_whole_volume_3d_mri/**
+!results/03_subcortical_mri_roi/
+!results/03_subcortical_mri_roi/**
+!results/04_final_comparison/
+!results/04_final_comparison/**
 !results/figures/
 !results/figures/**
-!results/experiment_summaries/
-!results/experiment_summaries/**
+
+# 10. Local Development Folders & Scratches
+experiments/
+reports/
+*.R
+requirements.lock.txt
 
 # Synthetic Demo Generated Data
 examples/synthetic_data_example/data/

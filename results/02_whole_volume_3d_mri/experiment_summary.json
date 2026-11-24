@@ -1,0 +1,47 @@
+{
+  "experiment_name": "02_whole_volume_3d_mri",
+  "approach": "Whole-Volume 3D MRI Ablation",
+  "cohort": {
+    "sample_size": 622,
+    "converters": 144,
+    "non_converters": 478,
+    "mri_scans_available": 564,
+    "mri_scans_missing": 58,
+    "missingness_handling": "Zero-masking with explicit modal indicator and attention dropout (p=0.3)"
+  },
+  "protocol": {
+    "repeats": 3,
+    "folds_per_repeat": 5,
+    "total_runs_per_model": 15,
+    "total_runs_combined": 30,
+    "evaluation": "Paired out-of-fold predictions averaged across 3 repeats (15 models per approach)"
+  },
+  "models": {
+    "model_a_control": {
+      "name": "Clinical + FreeSurfer FS29 Compact Attention (No MRI)",
+      "parameters": 106753,
+      "use_mri": false,
+      "use_fs": true,
+      "pooled_auroc": 0.8517,
+      "pooled_prauc": 0.6640,
+      "pooled_brier": 0.1392
+    },
+    "model_b_experimental": {
+      "name": "Clinical + FreeSurfer FS29 + Baseline 3D MRI Compact Attention",
+      "parameters": 743665,
+      "use_mri": true,
+      "use_fs": true,
+      "pooled_auroc": 0.8587,
+      "pooled_prauc": 0.6712,
+      "pooled_brier": 0.1354
+    }
+  },
+  "paired_statistical_test": {
+    "metric": "AUROC",
+    "delta": 0.0070,
+    "ci_95": [-0.0057, 0.0197],
+    "p_value": 0.2860,
+    "statistical_significance": false,
+    "interpretation": "The addition of raw whole-volume 3D MRI via 3D CNN and cross-modal attention yielded a nominal gain of +0.0070 in AUROC, which is not statistically significant (p = 0.2860, 95% CI crosses zero)."
+  }
+}

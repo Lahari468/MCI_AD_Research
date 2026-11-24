@@ -2,4 +2,4 @@ phase,n,positives,negatives,model_a_auroc,model_b_auroc,delta_b_minus_a
 ADNI1,188,72,116,0.7981,0.7968,-0.0013
 ADNI2,204,38,166,0.8519,0.8581,0.0062
 ADNI3,93,10,83,0.8627,0.8904,0.0277
-ADNIGO,79,3,76,0.943,0.9474,0.0044
+ADNIGO,79,3,76,0.9430,0.9474,0.0044

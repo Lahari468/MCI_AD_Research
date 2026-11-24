@@ -27,6 +27,9 @@ reference:
     mni152_brain_mask: "data/reference/atlases/MNI152_T1_2mm_brain_mask.nii.gz"
 
 results:
-  summary_tables: "results/summary_tables"
+  baselines: "results/00_baselines"
+  feature_ablation: "results/01_feature_ablation"
+  whole_volume_3d_mri: "results/02_whole_volume_3d_mri"
+  subcortical_mri_roi: "results/03_subcortical_mri_roi"
+  final_comparison: "results/04_final_comparison"
   figures: "results/figures"
-  experiment_summaries: "results/experiment_summaries"

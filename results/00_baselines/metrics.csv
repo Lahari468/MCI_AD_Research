@@ -1,0 +1,5 @@
+model,feature_set,cohort_n,converters,non_converters,auroc_rep_mean,rep_sd,auroc_pooled,ci_lo,ci_hi,prauc,brier,logloss,evaluation_protocol
+Clinical_Only_LR,Clinical (10 features),622,144,478,0.834,0.018,0.8440,0.8100,0.8780,0.6070,0.1300,0.4080,3-Repeat 5-Fold CV (Repeat 0 AUROC: 0.8426)
+FreeSurfer_Only_LR,FreeSurfer (FS29 ICV-norm),622,144,478,0.809,0.005,0.8131,0.7704,0.8492,0.5958,0.1345,0.4207,Single 5-Fold CV with Phase (AUROC: 0.8131)
+Clinical_plus_FS29_LR_SingleCV,Clinical (10) + FS29,622,144,478,0.863,0.016,0.8632,0.8290,0.8970,0.6690,0.1160,0.3700,Single 5-Fold CV Repeat 0 (AUROC: 0.8632)
+Clinical_plus_FS29_LR_3Repeat,Clinical (10) + FS29,622,144,478,0.876,0.006,0.8787,0.8464,0.9050,0.7088,0.1120,0.3550,3-Repeat 5-Fold CV Ensemble (15 folds pooled)

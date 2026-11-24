@@ -1,0 +1,57 @@
+{
+  "experiment_name": "00_baselines",
+  "cohort": {
+    "dataset": "ADNI (ADNI1, GO, 2)",
+    "cohort_split": "development",
+    "sample_size": 622,
+    "converters": 144,
+    "non_converters": 478,
+    "conversion_prevalence_pct": 23.15,
+    "locked_test_holdout_n": 156
+  },
+  "models_evaluated": [
+    {
+      "model_name": "Clinical_Only_LR",
+      "model_family": "LogisticRegression_L2",
+      "feature_count": 10,
+      "features": ["age", "sex", "education", "apoe4", "mmse", "cdrsb", "cdr_global", "faq", "adas11", "adas13"],
+      "evaluation": "3-repeat 5-fold CV",
+      "repeat_mean_auroc": 0.834,
+      "repeat_sd": 0.018,
+      "pooled_repeat_averaged_auroc": 0.844,
+      "repeat_0_auroc": 0.8426
+    },
+    {
+      "model_name": "FreeSurfer_Only_LR",
+      "model_family": "LogisticRegression_L2",
+      "feature_count": 29,
+      "features": "FS29 regional morphometry normalized by intracranial volume (ST10CV)",
+      "evaluation": "5-fold CV",
+      "auroc": 0.8131,
+      "ci_95": [0.7704, 0.8492],
+      "pr_auc": 0.5958
+    },
+    {
+      "model_name": "Clinical_plus_FS29_LR_SingleCV",
+      "model_family": "LogisticRegression_L2",
+      "feature_count": 39,
+      "features": "Clinical (10) + FreeSurfer FS29 (29)",
+      "evaluation": "Single 5-fold CV (Repeat 0)",
+      "auroc": 0.8632,
+      "pr_auc": 0.6690
+    },
+    {
+      "model_name": "Clinical_plus_FS29_LR_3Repeat",
+      "model_family": "LogisticRegression_L2",
+      "feature_count": 39,
+      "features": "Clinical (10) + FreeSurfer FS29 (29)",
+      "evaluation": "3-repeat 5-fold CV ensemble (seeds 42, 123, 456; 15 folds pooled)",
+      "repeat_mean_auroc": 0.876,
+      "repeat_sd": 0.006,
+      "pooled_repeat_averaged_auroc": 0.8787,
+      "ci_95": [0.8464, 0.9050],
+      "pr_auc": 0.7088,
+      "brier_score": 0.1120
+    }
+  ]
+}

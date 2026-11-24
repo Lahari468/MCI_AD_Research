@@ -1,0 +1,34 @@
+{
+  "experiment_name": "01_feature_ablation",
+  "objective": "Evaluate model sensitivity to feature selection, follow-up censoring thresholds, reverse conversions, and scanner/cohort eras",
+  "key_findings": [
+    {
+      "analysis": "Strict Follow-Up Horizon (N=583)",
+      "sample_size": 583,
+      "converters": 144,
+      "non_converters": 439,
+      "clinical_auroc": 0.8525,
+      "clinical_plus_fs29_auroc": 0.8860,
+      "ci_95": [0.8555, 0.9129],
+      "delta_freesurfer": 0.0335,
+      "delta_ci_95": [0.0070, 0.0595],
+      "interpretation": "Excluding 39 non-converters censored between 640 and 729 days eliminates right-censoring ambiguity, raising combined AUROC to 0.8860 while confirming robust FreeSurfer incremental gain."
+    },
+    {
+      "analysis": "Non-Circular Feature Sensitivity (N=622)",
+      "sample_size": 622,
+      "clinical_features_retained": 7,
+      "clinical_features_excluded": ["cdrsb", "cdr_global", "faq"],
+      "clinical_auroc": 0.8119,
+      "clinical_plus_fs29_auroc": 0.8615,
+      "delta_freesurfer": 0.0496,
+      "interpretation": "Removing functional and diagnostic-adjacent scales (CDR, FAQ) lowers clinical baseline from 0.8396 to 0.8119, but FreeSurfer morphometry compensates with an even larger incremental delta (+0.0496 vs +0.0391)."
+    },
+    {
+      "analysis": "Reverter and Early-Conversion Robustness",
+      "no_reverters_auroc": 0.8655,
+      "excl_early_conv_auroc": 0.8698,
+      "interpretation": "Model performance remains stable across varying clinical exclusion definitions, confirming that findings are not driven by rapid converters or fluctuating diagnostic boundaries."
+    }
+  ]
+}

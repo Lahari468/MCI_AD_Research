@@ -1,4 +1,0 @@
-metric,model_a_primary,model_b_mri,delta_b_minus_a,ci_2.5,ci_97.5,p_value,method
-AUROC,0.8517,0.8587,0.007,-0.0057,0.0197,0.286,"Paired participant bootstrap (B=2000, seed 42) on 3-repeat averaged out-of-fold predictions"
-PR-AUC,0.664,0.6712,0.0073,-0.0271,0.0471,0.714,"Paired participant bootstrap (B=2000, seed 42) on 3-repeat averaged out-of-fold predictions"
-Brier,0.1392,0.1354,-0.0038,-0.0081,0.0004,0.079,"Paired participant bootstrap (B=2000, seed 42) on 3-repeat averaged out-of-fold predictions"

@@ -1,0 +1,12 @@
+variant,cohort_n,converters,non_converters,auc_clin,auc_clin_fs,ci_lo,ci_hi,delta_fs,delta_ci_lo,delta_ci_hi,prauc_clin_fs,description
+primary_development,622,144,478,0.8396,0.8787,0.8464,0.9050,0.0391,0.0154,0.0638,0.7088,Primary development cohort 3-repeat ensemble
+strict_pre_anchor_fs,622,144,478,0.8396,0.8793,0.8500,0.9059,0.0397,0.0140,0.0654,0.7175,FreeSurfer derived strictly prior to anchor date
+excl_early_conv_180d,610,132,478,0.8329,0.8698,0.8376,0.9002,0.0370,0.0112,0.0631,0.6793,Excluding progression events within 180 days of baseline
+ad_conversion_820d,622,145,477,0.8386,0.8762,0.8462,0.9051,0.0376,0.0120,0.0626,0.7025,Extending endpoint horizon to 820 days
+neg_window_640_820,544,144,400,0.8330,0.8711,0.8361,0.9004,0.0382,0.0110,0.0669,0.7368,Negative follow-up restricted to 640-820 day window
+neg_window_550_910,575,144,431,0.8408,0.8731,0.8389,0.9020,0.0323,0.0071,0.0568,0.7145,Negative follow-up restricted to 550-910 day window
+strict_followup_ge730d,583,144,439,0.8525,0.8860,0.8555,0.9129,0.0335,0.0070,0.0595,0.7502,Strict follow-up excluding 39 controls censored <730d
+no_reverters,547,143,404,0.8136,0.8655,0.8334,0.8984,0.0519,0.0212,0.0817,0.7165,Excluding diagnostic reverters (MCI -> CN -> MCI/AD)
+adni1_only,241,92,149,0.7728,0.8142,0.7588,0.8730,0.0414,-0.0123,0.0930,0.7487,Subgroup analysis restricted to ADNI1 participants
+excl_adni1_adnigo2,381,52,329,0.8668,0.9026,0.8616,0.9404,0.0358,0.0001,0.0729,0.6435,Subgroup analysis restricted to ADNIGO and ADNI2
+non_circular_clinical,622,144,478,0.8119,0.8615,0.8254,0.8917,0.0496,0.0210,0.0782,0.6762,Clinical features restricted to 7 non-diagnostic markers
