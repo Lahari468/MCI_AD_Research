@@ -23,7 +23,7 @@ This project investigates whether baseline MRI features—as whole-brain 3D volu
 
 ## 3. Methodology
 
-### Cohort Construction & Verification
+### a. Cohort Construction & Verification
 From 1,199 screened ADNI participants, 778 met inclusion criteria: baseline MCI, complete clinical scales, available FreeSurfer morphometry, and documented 24-month outcomes (conversion $\le 730$ days; non-conversion follow-up $\ge 640$ days).
 - **Primary Development Cohort ($N = 622$):** 144 converters (23.15%), 478 non-converters; 564 have baseline 3D T1 MRI (58 missing scans zero-masked with explicit indicators in whole-volume models).
 - **Matched Complete-Case Cohort ($N = 564$):** 123 converters (21.81%), 441 non-converters. Restricts analysis to participants with complete baseline MRI for unmasked ROI evaluation.
@@ -31,24 +31,24 @@ From 1,199 screened ADNI participants, 778 met inclusion criteria: baseline MCI,
 
 Details and flowcharts: [docs/dataset_and_cohort.md](docs/dataset_and_cohort.md).
 
-### Feature Sets
+### b. Feature Sets
 - **Clinical / Cognitive (10):** Age, sex, education, APOE4 count, MMSE, CDR-SB, CDR Global, FAQ, ADAS11, ADAS13.
 - **FreeSurfer Morphometry (FS29):** 29 cortical thickness and subcortical volume features; volumes normalized by total intracranial volume (`ST10CV`).
 - **Subcortical ROIs (16 Target Features):** Extracted from Harvard-Oxford subcortical atlas structures (bilateral hippocampus, amygdala, and lateral ventricles). Features include 9 median intensity contrast measures relative to reference white matter, 6 intensity dispersion/heterogeneity measures (standard deviation), and 1 composite ventricle-to-hippocampus contrast difference.
 
 Details: [docs/feature_engineering.md](docs/feature_engineering.md).
 
-### MRI Preprocessing & Quality Control
+### c. MRI Preprocessing & Quality Control
 Baseline T1-weighted volumes were processed without native skull-stripping. The pipeline applied spatial reorientation (`fslreorient2std`), field-of-view cropping (`robustfov`), N4 bias-field correction (SimpleITK), and 12-DOF affine registration (`flirt`) to the MNI152 2mm template ($91 \times 109 \times 91$ voxels). Post-registration brain extraction and intensity z-scoring were performed using the standard MNI152 template brain mask. Quality control audited registration alignment using normalized cross-correlation (NCC) to the MNI152 template inside the brain mask, affine scaling, and rotation angle thresholds. Scanner metadata (e.g., 1.5T vs 3.0T field strength) was cataloged across cohorts without serving as an automated quality filter. Details: [docs/mri_preprocessing.md](docs/mri_preprocessing.md).
 
-### Model Architectures
+### d. Model Architectures
 - **Tabular Baselines:** L2-regularized Logistic Regression with nested validation for $C \in [10^{-3}, 10^{2}]$ and decision thresholds.
 - **Multimodal Architecture (Stage 12):** Tabular MLP encoders and a 4-stage 3D CNN integrated via **inter-modality multi-head self-attention** ($h = 2, d = 32$) with missingness conditioning, trained on CPU.
 - **Subcortical ROI Fusion (Stage 19):** L2-regularized logistic regression combining clinical, FreeSurfer, and subcortical ROI intensity features with inner-fold median imputation and z-score standardization (no PCA).
 
 Details: [docs/model_architecture.md](docs/model_architecture.md).
 
-### Evaluation Strategy
+### e. Evaluation Strategy
 - **Cross-Validation:** 3-repeat 5-fold stratified cross-validation (fixed seeds 42, 123, 456) with fold-isolated preprocessing.
 - **Metric Reporting:** Both fold-averaged repeat mean AUROC and pooled repeat-averaged AUROC (computed on participant-level out-of-fold probability vectors averaged across repeats) are tracked.
 - **Statistical Inference:** Participant-level paired bootstrap hypothesis testing ($B = 2,000$ resamples) on out-of-fold predictions evaluates incremental differences ($\Delta$) in AUROC, PR-AUC, and Brier score. Details: [docs/experimental_design.md](docs/experimental_design.md).
