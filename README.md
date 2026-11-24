@@ -2,7 +2,6 @@
 
 A reproducible empirical evaluation assessing whether baseline whole-volume 3D MRI or targeted subcortical ROI intensity features provide statistically significant incremental prognostic value beyond standardized clinical assessments and FreeSurfer morphometry for 24-month MCI-to-AD progression.
 
----
 
 ## 1. Overview
 
@@ -14,7 +13,6 @@ Predicting progression from Mild Cognitive Impairment (MCI) to Alzheimer's Disea
   2. *FreeSurfer Morphometry (FS29):* Intracranial volume-normalized cortical thickness and subcortical volume measures.
   3. *Structural 3D T1 MRI:* Whole-volume 3D convolutional neural network (CNN) representations and 16 targeted subcortical ROI-derived intensity/heterogeneity features across primary AD-vulnerable regions (hippocampus, amygdala, lateral ventricles).
 
----
 
 ## 2. Research Objective
 
@@ -22,7 +20,6 @@ Multimodal deep learning literature often assumes that adding 3D MRI volumes to 
 
 This project investigates whether baseline MRI features—as whole-brain 3D volumes or targeted subcortical intensity distributions—provide a statistically significant improvement in discrimination and calibration beyond properly regularized tabular clinical and morphometric models via leak-free multi-repeat cross-validation and participant-level paired bootstrap hypothesis testing.
 
----
 
 ## 3. Methodology
 
@@ -56,7 +53,6 @@ Details: [docs/model_architecture.md](docs/model_architecture.md).
 - **Metric Reporting:** Both fold-averaged repeat mean AUROC and pooled repeat-averaged AUROC (computed on participant-level out-of-fold probability vectors averaged across repeats) are tracked.
 - **Statistical Inference:** Participant-level paired bootstrap hypothesis testing ($B = 2,000$ resamples) on out-of-fold predictions evaluates incremental differences ($\Delta$) in AUROC, PR-AUC, and Brier score. Details: [docs/experimental_design.md](docs/experimental_design.md).
 
----
 
 ## 4. Key Findings
 
@@ -79,7 +75,6 @@ The table below highlights the primary experimental comparisons. Metrics reflect
 
 For complete chronological experiment reports, see [docs/experiment_history.md](docs/experiment_history.md) and [results/README.md](results/README.md).
 
----
 
 ## 5. Repository Structure
 
@@ -99,7 +94,6 @@ MCI_AD_Research/
 
 Detailed documentation and result tables are available in [`docs/`](docs/) and [`results/`](results/).
 
----
 
 ## 6. Reproducibility & Setup
 
@@ -127,7 +121,6 @@ This script generates synthetic tabular and 3D volumetric data, fits baseline an
 ### Full ADNI Reproduction Prerequisites
 Full reproduction from raw ADNI scans requires credentialed ADNI access, downloaded imaging volumes, and neuroimaging software (FSL 6.0+). The modular pipeline covers cohort construction, feature extraction, 3D affine registration, baseline models, multimodal CPU training, and paired bootstrap statistical testing. Full stage-by-stage prerequisites and validation levels are documented in [docs/reproducibility.md](docs/reproducibility.md).
 
----
 
 ## 7. Data Access & Privacy
 
@@ -135,7 +128,6 @@ To strictly comply with the **ADNI Data Use Agreement** and protect participant 
 
 Researchers must obtain credentialed access directly via the [LONI ADNI Portal](https://adni.loni.usc.edu/). Once access is approved and raw files are downloaded, local data paths must be configured in [`configs/paths.yaml`](configs/paths.yaml) to run raw-data pipeline scripts.
 
----
 
 ## 8. License & Citation
 
@@ -157,7 +149,6 @@ This repository contains an unpublished academic research codebase. If you refer
 
 Machine-readable bibliographic metadata is available in [`CITATION.cff`](CITATION.cff).
 
----
 
 ## 9. Acknowledgments
 
