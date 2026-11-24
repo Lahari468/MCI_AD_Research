@@ -10,7 +10,7 @@
 
 ## 2. Abstract / Executive Summary
 
-Predicting short-term progression from Mild Cognitive Impairment (MCI) to Alzheimer's Disease (AD) dementia is critical for clinical trial enrichment and early therapeutic intervention. While multimodal deep learning frameworks frequently incorporate raw 3D T1-weighted structural Magnetic Resonance Imaging (MRI), the true incremental prognostic value of voxel-level representations over standardized clinical testing and regional morphometry remains contentious. 
+Predicting short-term progression from Mild Cognitive Impairment (MCI) to Alzheimer's Disease (AD) dementia is critical for clinical trial enrichment and early therapeutic intervention. While multimodal deep learning frameworks frequently incorporate raw 3D T1-weighted structural Magnetic Resonance Imaging (MRI), the true incremental prognostic value of voxel-level representations over standardized clinical testing and regional morphometry remains contentious.
 
 In this investigation, we conduct a rigorous, leak-free empirical evaluation using participants from the Alzheimer's Disease Neuroimaging Initiative (ADNI). Starting from 1,199 screened participants, we establish a verified eligible cohort of 778 individuals partitioned into a primary development cohort ($N=622$) and a frozen internal holdout ($N=156$). We compare two distinct computer vision paradigms against robust tabular baselines:
 1. **Whole-Volume 3D MRI Ablation:** A 4-stage 3D Convolutional Neural Network (CNN) integrated with clinical and FreeSurfer tabular features via inter-modality multi-head self-attention.
@@ -479,10 +479,10 @@ Test coverage includes:
 
 Our evaluation was initiated to evaluate findings from recent multimodal deep learning literature on MCI progression:
 
-**Reference Base Paper:**  
-*“Multimodal Fusion with Cross-Modal Attention for Robust MCI-to-AD Prediction”*  
-Authors: Druthi K. N. and Chiranjeevi C.  
-IEEE AIDE 2026 (DOI: `10.1109/AIDE69088.2026.11545135`)  
+**Reference Base Paper:**
+*“Multimodal Fusion with Cross-Modal Attention for Robust MCI-to-AD Prediction”*
+Authors: Druthi K. N. and Chiranjeevi C.
+IEEE AIDE 2026 (DOI: `10.1109/AIDE69088.2026.11545135`)
 - Reported Abstract Results: Cohort $N=1,008$; progression prevalence 18.6%; MRI availability 14.8%; Clinical AUROC 0.732; FreeSurfer AUROC 0.781; MRI AUROC 0.823; Multimodal AUROC 0.874.
 
 ### Key Methodological Advancements in Our Work
