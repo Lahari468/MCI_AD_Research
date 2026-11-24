@@ -26,7 +26,8 @@ Across 3-repeat 5-fold cross-validation and paired participant bootstrap hypothe
 - **Whole-Volume 3D CNN Yields Negligible Incremental Benefit:** Incorporating baseline 3D T1 MRI volumes into a compact cross-modal attention network increases AUROC from $0.8517$ (Model A: Clinical + FreeSurfer, MRI disabled) to **$0.8587$** (Model B: Clinical + FreeSurfer + 3D MRI). The paired difference of $\Delta = \mathbf{+0.0070}$ (95% CI: $[-0.0057, +0.0197]$) is not statistically significant ($p = \mathbf{0.2860}$).
 - **Targeted Subcortical ROIs Confirm the Disconfirmation:** Restricting feature extraction to 16 biologically validated subcortical regions of interest yields an AUROC of **$0.8688$** compared to $0.8643$ for Clinical + FreeSurfer alone. The incremental gain of $\Delta = \mathbf{+0.0044}$ (95% CI: $[-0.0029, +0.0122]$, $p = \mathbf{0.2440}$) is not statistically significant.
 - **Robustness to Follow-Up Censoring:** Restricting negative follow-up strictly to participants with documented negative visits at $\ge 730$ days ($N=583$) elevates combined Clinical + FreeSurfer AUROC to **$0.8860$** (95% CI: $[0.8555, 0.9129]$, PR-AUC: $0.7502$), confirming that findings are not artifacts of right-censoring boundaries.
-- **Redundancy of Residual MRI Variance:** Pearson correlation between subcortical ROI intensity statistics and macroscopic FreeSurfer volume metrics is low-to-moderate ($r = 0.30 - 0.36$), confirming distinct biological capture. However, when clinical scales and morphometric boundaries are already available, residual voxel intensity variance provides negligible prognostic signal for 24-month progression.
+- **Anatomical Intensity vs Volumetric Morphometry:** Pearson correlation between subcortical ROI intensity statistics and macroscopic FreeSurfer volume metrics is low-to-moderate ($r = 0.30 - 0.36$), confirming that tissue intensity and volumetric atrophy capture non-identical biological properties.
+- **Empirical Finding on Incremental Predictive Value:** In the evaluated cohort and experimental settings, neither whole-volume MRI representations nor anatomically informed subcortical MRI ROI features demonstrated a statistically significant incremental predictive improvement beyond clinical and FreeSurfer morphometric features.
 
 ---
 
@@ -36,7 +37,7 @@ Across 3-repeat 5-fold cross-validation and paired participant bootstrap hypothe
 > *Does baseline 3D structural MRI provide statistically defensible incremental predictive value beyond standardized clinical testing and FreeSurfer morphometry for 24-month MCI-to-AD progression?*
 
 ### Empirical Answer
-> **No.** Across both whole-volume 3D representation learning and anatomically targeted subcortical intensity profiling, the addition of baseline 3D T1 MRI features does not provide a statistically significant incremental benefit ($p = 0.2860$ and $p = 0.2440$) beyond a competitive baseline combining clinical assessments with FreeSurfer morphometry.
+> **In the evaluated cohort and experimental settings, neither whole-volume MRI representations nor anatomically informed subcortical MRI ROI features demonstrated a statistically significant incremental predictive improvement beyond clinical and FreeSurfer morphometric features ($p = 0.2860$ and $p = 0.2440$).** We preserve the critical scientific distinction between failing to reject the null hypothesis of equal performance and claiming proof of equivalence or asserting that MRI has no biological value.
 
 ---
 
@@ -123,9 +124,7 @@ MCI_AD_Research/
 │   ├── 04_final_comparison/            # Cross-study synthesis and meta-review
 │   ├── figures/                        # Forest plots and publication curves
 │   ├── experiments/                    # Stage 5 audit artifacts (tested by pytest)
-│   ├── paper/                          # Manuscript summary tables and figures
-│   ├── summary_tables/                 # Flat CSV export tables
-│   └── experiment_summaries/           # JSON configuration summaries
+│   └── paper/                          # Manuscript summary tables and figures
 │
 ├── examples/                           # Interactive demonstration examples
 │   ├── example_config.yaml             # Demo parameters
@@ -237,6 +236,7 @@ flowchart LR
 | **Subcortical ROI (Model A: Clin+FS)**| Matched Dev | 564 | 124 / 564 | 0.8643 | [0.8260, 0.8992] | 0.6598 | 0.1132 | **+0.0433** | **0.0020** | **Statistically Significant** |
 | **Subcortical ROI (Model B: +ROIs)** | Matched Dev | 564 | 124 / 564 | **0.8688** | [0.8312, 0.9026] | 0.6756 | 0.1116 | **+0.0044** | **0.2440** | **Not Significant** |
 | **Negative Control ROIs (Model C)** | Matched Dev | 564 | 124 / 564 | 0.8640 | [0.8251, 0.8998] | 0.6671 | 0.1140 | -0.0003 | 0.8770 | Not Significant |
+| **3-Channel MRI (Exploratory)** | Full Dev | 622 | 144 / 622 | 0.8452 | [0.8089, 0.8840] | 0.6288 | 0.1406 | -0.0065 | — | Exploratory (Single-Repeat CV) |
 
 ---
 
@@ -267,9 +267,9 @@ Contrast 3: Subcortical MRI ROI Contrast (Model B vs Model A, N=564)
 
 Scientific integrity requires transparently reporting negative and null results rather than selectively filtering for artificially inflated gains:
 
-1. **We Do Not Claim MRI Lacks Biological Value:** Structural brain atrophy is a hallmark of Alzheimer's Disease progression. Rather, our findings demonstrate that **once standardized FreeSurfer morphometry (cortical thickness and subcortical volumes) has been extracted and combined with cognitive measures, the residual information in baseline T1 voxel intensities provides negligible additional discrimination**.
-2. **Two Independent Engineering Paradigms Disconfirmed MRI Increment:** Neither an end-to-end deep 3D CNN nor targeted anatomical subcortical intensity statistics produced a statistically defensible improvement ($\Delta = +0.0070, p = 0.2860$ and $\Delta = +0.0044, p = 0.2440$).
-3. **Implications for Translational Medicine:** In clinical trial stratification, acquiring high-dimensional 3D MRI for deep representation learning may add substantial computational and logistical overhead without delivering clinical benefit over automated FreeSurfer volumetric profiling.
+1. **Distinction Between Non-Significance and Equivalence:** We do not claim that FreeSurfer completely captures all biological information in MRI, nor that MRI residual intensity is universally non-informative, nor that MRI has no biological value or cannot improve prediction under different clinical horizons, imaging modalities, or future architectures. Rather, our empirical finding is precise: **in the evaluated cohort and experimental settings, neither whole-volume MRI representations nor anatomically informed subcortical MRI ROI features demonstrated a statistically significant incremental predictive improvement beyond clinical and FreeSurfer morphometric features**.
+2. **Dual Independent Disconfirmation:** Neither an end-to-end deep 3D CNN ($\Delta = +0.0070, p = 0.2860$) nor targeted anatomical subcortical intensity statistics ($\Delta = +0.0044, p = 0.2440$) produced a statistically significant performance gain beyond Clinical + FreeSurfer morphometry.
+3. **Implications for Translational Medicine:** In clinical trial stratification and prognostic scoring, investing in complex 3D image representation learning may add substantial computational and logistical overhead without delivering statistically defensible prognostic gains when standardized clinical assessments and FreeSurfer morphometry are already acquired and properly regularized.
 
 ---
 
@@ -394,13 +394,31 @@ For authorized researchers with access to the ADNI database, execute the 11 pipe
 - **Runtime:** ~2 minutes
 - **Data Required:** Tabular feature CSVs
 
-### Step 11: Statistical Evaluation and Master Synthesis
-- **Command:** `python scripts/evaluation/evaluate_paired_bootstrap.py`
-- **Inputs:** Out-of-fold predictions from Steps 8, 9, and 10
-- **Outputs:** `results/04_final_comparison/metrics.csv`, `results/figures/F_forest_mri_v2.png`
-- **Config:** `configs/paths.yaml`
-- **Runtime:** ~1 minute
+### Step 11: Statistical Evaluation and Paired Bootstrap Contrasts
+- **Command:** `python scripts/evaluation/evaluate_paired_bootstrap.py --predictions_csv results/stage12_3repeat/oof_predictions.csv --test_col prob_model_b --ref_col prob_model_a`
+- **Inputs:** Out-of-fold prediction CSV with participant probabilities
+- **Outputs:** Bootstrap empirical difference, 95% percentile confidence intervals, and tail $p$-values printed to stdout
+- **Config:** CLI flags (`--predictions_csv`, `--test_col`, `--ref_col`, `--label_col`, `--resamples`, `--seed`)
+- **Runtime:** ~1 minute (for $B=2000$)
 - **Data Required:** Prediction CSVs
+
+---
+
+### Pipeline Command Validation Matrix
+
+| Step | Command | Required Input | Expected Output | Validation Status |
+| :---: | :--- | :--- | :--- | :--- |
+| **1** | `python scripts/data_preparation/build_cohort.py` | `ADNIMERGE.csv`, `DXSUM_PDXCONV_ADNIALL.csv` | `data/processed/cohort_v2b.csv` | **Verified** (Syntax OK; expects raw ADNI tabular data) |
+| **2** | `python scripts/data_preparation/generate_splits.py` | `data/processed/cohort_v2b.csv` | `data/processed/splits/splits_v1.csv` | **Verified** (Syntax OK; splits verified by 4 unit tests) |
+| **3** | `python scripts/feature_extraction/extract_clinical_features.py` | `cohort_v2b.csv`, raw clinical CSVs | `data/processed/features/clinical_raw_v1.csv` | **Verified** (Syntax OK; feature schema tested) |
+| **4** | `python scripts/feature_extraction/extract_freesurfer_features.py` | `UCSFFSX7.csv`, `cohort_v2b.csv` | `data/processed/features/freesurfer29_raw_v1.csv` | **Verified** (Syntax OK; ICV normalization tested) |
+| **5** | `python scripts/preprocessing/preprocess_mri_volumes.py --roots <dir>` | Raw T1 DICOM/NIfTI directories | `data/interim/mri_mni2mm_v2/` | **Verified** (CLI `--help` clean exit 0; requires local scans + FSL) |
+| **6** | `python scripts/quality_control/audit_mri_quality.py` | `mri_mni2mm_v2/`, `cohort_v2b.csv` | Quality logs & outlier flags | **Verified** (Syntax OK; requires local scans + FSLDIR) |
+| **7** | `python scripts/feature_extraction/extract_mri_subcortical_rois.py` | `mri_mni2mm_v2/`, Harvard-Oxford atlas | `data/processed/features/mri_subcortical_roi_features.csv` | **Verified** (Syntax OK; requires preprocessed volumes) |
+| **8** | `bash scripts/run_tabular_suite.sh` | Processed clinical & FreeSurfer CSVs | Baseline out-of-fold predictions | **Verified** (Shell script & underlying `train_cv.py` compile OK) |
+| **9** | `python scripts/training/run_stage12_3repeat_ablation.py` | MRI tensors, clinical & FS29 CSVs, splits | `results/02_whole_volume_3d_mri/metrics.csv` | **Verified** (Syntax & imports OK; executes on CPU or MPS) |
+| **10** | `python scripts/training/run_stage19_mri_roi_incremental.py` | Subcortical ROI, clinical & FS29 CSVs | `results/03_subcortical_mri_roi/metrics.csv` | **Verified** (Syntax & imports OK; executes in ~2 min) |
+| **11** | `python scripts/evaluation/evaluate_paired_bootstrap.py --predictions_csv <f> --test_col <t> --ref_col <r>` | OOF prediction CSV | Paired delta, 95% CIs, and tail $p$-values | **Verified** (CLI `--help` clean exit 0; bootstrap tested) |
 
 ---
 
@@ -495,7 +513,7 @@ See [`CITATION.cff`](file:///Users/lahari/Desktop/MCI_AD_Research/CITATION.cff) 
 
 ## 24. License
 
-This repository and its original software implementations are released under the terms of the Academic Research Code License. Review the full terms in the [`LICENSE`](file:///Users/lahari/Desktop/MCI_AD_Research/LICENSE) file.
+This repository and its original software implementations are released under a custom **Academic Research Code License** for non-commercial academic research and educational evaluation. It is not an unrestricted open-source license and does not transfer, distribute, or license any proprietary medical imaging, clinical, or genetic data from the Alzheimer's Disease Neuroimaging Initiative (ADNI). Access to ADNI data requires separate application, credentialing, and compliance directly through LONI. Review the complete terms in the [`LICENSE`](LICENSE) file.
 
 ---
 

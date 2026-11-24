@@ -20,9 +20,7 @@ results/
 ├── figures/                   # Forest plots, missingness curves, and diagnostic figures
 │
 ├── experiments/               # Stage 5 audit artifacts (preserved for automated regression test suite)
-├── paper/                     # Manuscript summary tables and reference figures
-├── summary_tables/            # Flat CSV export tables for downstream publication pipelines
-└── experiment_summaries/      # JSON configuration summaries for model architectures
+└── paper/                     # Manuscript summary tables and reference figures
 ```
 
 ---
@@ -80,8 +78,13 @@ The two MRI branches represent fundamentally distinct computer vision paradigms 
 
 ---
 
-## Preserved Legacy Directories for Reproducibility
+## Scientific Conclusion
+
+In the evaluated cohort and experimental settings, neither whole-volume MRI representations nor anatomically informed subcortical MRI ROI features demonstrated a statistically significant incremental predictive improvement beyond clinical and FreeSurfer morphometric features. We preserve the distinction between failing to reject the null hypothesis of equal performance and claiming proof of equivalence or stating that MRI has no biological value.
+
+---
+
+## Preserved Legacy Directories for Automated Tests
 
 - `results/experiments/`: Preserves intermediate out-of-fold predictions (`e1_oof.csv`), fold splits (`e1_folds.csv`), permutation null distribution arrays (`*.npy`), and switch curves (`e2_switch_curve.csv`). These files are verified by unit tests in `tests/test_experiments_outputs.py`.
 - `results/paper/`: Preserves tables and figures formatted for publication manuscripts (`T10a_mri_incremental_value.csv`, `T10b_mri_only_models.csv`, `F_forest_mri.png`). These are verified by unit tests in `tests/test_mri_tables.py`.
-- `results/summary_tables/` & `results/experiment_summaries/`: Preserves machine-readable flat CSVs and architecture JSONs referenced by `configs/paths.yaml`.

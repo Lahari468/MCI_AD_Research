@@ -30,8 +30,8 @@
       }
     ],
     "conclusions": {
-      "scientific_claim": "Neither raw whole-volume 3D MRI nor targeted subcortical MRI intensity features provide a statistically significant incremental benefit beyond Clinical tests and FreeSurfer regional morphometry.",
-      "nuance": "This does not imply that MRI lacks biological value. Rather, when high-quality regional morphometry (FreeSurfer) is already extracted and combined with cognitive scales, the residual predictive information contained in baseline T1 MRI intensity is small and undetectable given standard clinical sample sizes."
+      "scientific_claim": "In the evaluated cohort and experimental settings, neither whole-volume MRI representations nor anatomically informed subcortical MRI ROI features demonstrated a statistically significant incremental predictive improvement beyond clinical and FreeSurfer morphometric features.",
+      "nuance": "This does not imply that MRI lacks biological value, nor that FreeSurfer completely captures all information in MRI. We preserve the distinction between a non-significant incremental result and proof of equivalence."
     }
   }
 }

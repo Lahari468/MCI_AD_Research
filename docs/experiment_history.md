@@ -113,12 +113,13 @@ flowchart TD
 ---
 
 ### Stage 5 — Exploratory 3-Channel 3D MRI Formulation ($N=622$)
-- **Source Files:** `logs/mri3ch.log`, `results/02_whole_volume_3d_mri/metrics.csv`
-- **Objective:** Test whether feeding multi-channel 3D tensors (Channel 1: raw intensity; Channel 2: local spatial mean via `avg_pool3d`; Channel 3: local spatial variance) improves feature extraction over single-channel CNNs.
+- **Source Files:** `results/deep/mri3ch_fs29_drop/summary.csv`, `results/deep/mri3ch_fs29_drop/config.json`, `results/02_whole_volume_3d_mri/metrics.csv`
+- **Objective:** Exploratory evaluation testing whether feeding multi-channel 3D tensors (Channel 1: raw intensity; Channel 2: local spatial mean via `avg_pool3d`; Channel 3: local spatial variance) improves feature extraction over single-channel CNNs.
+- **Protocol:** Single-repeat (Repeat 0), 5-fold cross-validation on the full development cohort ($N=622$, 144 converters).
 - **Results:**
-  - Pooled AUROC: **$0.8450$** (95% CI: $[0.8090, 0.8840]$)
-  - PR-AUC: **$0.6290$**, Brier: **$0.1420$**
-- **Conclusion:** Local first-order spatial texture pooling did not improve upon single-channel 3D CNNs.
+  - Out-of-fold AUROC: **$0.8452$** (unrounded $0.845217$, rounded in summary tables to $0.845$; 95% CI: $[0.8089, 0.8840]$)
+  - PR-AUC: **$0.6288$**, Brier: **$0.1406$**
+- **Conclusion:** In the evaluated cohort and experimental settings, local first-order spatial texture pooling did not provide a performance advantage over single-channel 3D CNNs or tabular morphometry.
 
 ---
 
@@ -160,4 +161,4 @@ flowchart TD
 
 1. **Dual Independent Disconfirmation:** Across both whole-volume representation learning (3D CNN) and targeted anatomical subcortical feature extraction, adding raw baseline MRI features does not yield a statistically significant incremental benefit ($\Delta = +0.0070, p = 0.2860$ and $\Delta = +0.0044, p = 0.2440$).
 2. **Robustness of FreeSurfer Morphometry:** In sharp contrast, regional FreeSurfer morphometric measures consistently provide significant incremental prognostic value across all sample sizes and model architectures ($\Delta \ge +0.0335$, $p \le 0.0020$).
-3. **Clinical Implication:** In clinical trial stratification and patient prognosis, high-quality FreeSurfer volumetric and cortical thickness summaries capture the predominant macroscopic neurodegenerative signal, rendering raw baseline T1 MRI voxel inputs largely redundant when conditioned on clinical and cognitive testing.
+3. **Empirical Implication:** In the evaluated cohort and experimental settings, neither whole-volume MRI representations nor anatomically informed subcortical MRI ROI features demonstrated a statistically significant incremental predictive improvement beyond clinical and FreeSurfer morphometric features. We preserve the critical distinction between a non-significant incremental result and proof of equivalence or claiming that MRI lacks biological value.

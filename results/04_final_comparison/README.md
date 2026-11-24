@@ -32,9 +32,9 @@ Across all tested cohorts and model architectures, FreeSurfer regional morphomet
 - Matched complete-case cohort ($N=564$): $\Delta = +0.0433$ (95% CI: $[+0.0135, +0.0747]$, $p = 0.0020$).
 
 ### 3. Nuanced Biological and Methodological Interpretation
-These empirical findings must not be misinterpreted as claiming that MRI "has no biological value." Rather:
-- Structural MRI provides critical information about cerebral atrophy.
-- However, standardized FreeSurfer morphometry (cortical thickness and subcortical volumes) already captures the primary macroscopic structural degradation relevant to short-term (24-month) clinical progression.
-- Once Clinical and FreeSurfer features are conditioned upon, residual voxel intensity variance does not contain enough incremental prognostic signal to reach statistical significance in development cohorts of several hundred participants.
+These empirical findings must not be misinterpreted as claiming that MRI has no biological value or that FreeSurfer completely captures all information in MRI. Rather:
+- Structural MRI provides critical information about cerebral atrophy and neurodegenerative changes.
+- In the evaluated cohort and experimental settings, neither whole-volume MRI representations nor anatomically informed subcortical MRI ROI features demonstrated a statistically significant incremental predictive improvement beyond clinical and FreeSurfer morphometric features.
+- We strictly preserve the distinction between failing to reject the null hypothesis of equal performance and claiming proof of equivalence or asserting that MRI cannot improve MCI-to-AD prediction under other designs.
 
 For complete numerical artifacts, see [`metrics.csv`](file:///Users/lahari/Desktop/MCI_AD_Research/results/04_final_comparison/metrics.csv) and [`experiment_summary.json`](file:///Users/lahari/Desktop/MCI_AD_Research/results/04_final_comparison/experiment_summary.json).

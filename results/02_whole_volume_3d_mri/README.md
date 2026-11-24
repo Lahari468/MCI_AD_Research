@@ -28,10 +28,10 @@ This directory documents the 3-repeat, 5-fold cross-validation ablation experime
 
 ### Exploratory 3-Channel MRI Variation
 
-An exploratory variant extracting intensity, local spatial mean, and local spatial variance channels via 3D average pooling was evaluated across the full cohort. It achieved a pooled AUROC of **$0.8450$** (95% CI: $[0.8090, 0.8840]$) and PR-AUC of $0.6290$, indicating that local first-order texture statistics did not outperform single-channel representations.
+An exploratory variant extracting intensity, local spatial mean, and local spatial variance channels via 3D average pooling was evaluated across the full development cohort (Repeat 0, 5-fold CV). It achieved an out-of-fold AUROC of **$0.8452$** (unrounded $0.845217$, 95% CI: $[0.8089, 0.8840]$), PR-AUC of $0.6288$, and Brier score of $0.1406$. In the evaluated cohort and experimental settings, local first-order spatial texture pooling did not provide an advantage over the single-channel 3D CNN or tabular morphometry.
 
 ## Scientific Conclusion
 
-The empirical paired bootstrap test fails to reject the null hypothesis of equal performance ($p = 0.2860$). Raw whole-volume 3D MRI processed through a standard 3D CNN does not provide a statistically significant incremental benefit over Clinical features and FreeSurfer morphometry alone in this 622-patient development cohort.
+In the evaluated cohort and experimental settings, neither whole-volume MRI representations nor anatomically informed subcortical MRI ROI features demonstrated a statistically significant incremental predictive improvement beyond clinical and FreeSurfer morphometric features. The empirical paired bootstrap test on out-of-fold predictions yields $\Delta = +0.0070$ ($p = 0.2860$), failing to reject the null hypothesis of equal performance. We preserve the critical scientific distinction between failing to reject the null hypothesis and claiming proof of equivalence or stating that MRI lacks biological utility.
 
 For detailed numbers, see [`metrics.csv`](file:///Users/lahari/Desktop/MCI_AD_Research/results/02_whole_volume_3d_mri/metrics.csv), [`paired_bootstrap_deltas.csv`](file:///Users/lahari/Desktop/MCI_AD_Research/results/02_whole_volume_3d_mri/paired_bootstrap_deltas.csv), and [`experiment_summary.json`](file:///Users/lahari/Desktop/MCI_AD_Research/results/02_whole_volume_3d_mri/experiment_summary.json).
